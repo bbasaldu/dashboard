@@ -1,0 +1,45 @@
+.container{
+    height: 100%;
+    background-color:none;
+    
+}
+
+.tooltip{
+    opacity: 0;
+    position: absolute;
+    width: auto;
+    padding: 0.5%;
+    /* width: 10%;
+    height: 10%; */
+    border-radius: 5px;
+    background-color: #b9c5c7;
+    align-self: center;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1vmax;
+    z-index: 1;
+    line-height: 1.6em;
+
+}
+.tooltipInner{
+    position: relative;
+    z-index: 1;
+    background-color: #b9c5c7;
+    font-family: Helvetica;
+    
+    
+    
+}
+
+.tooltipArrow{
+    position: absolute;
+    transform: rotate(45deg);
+    border-radius: 1px;
+    background-color: #b9c5c7;
+    
+    z-index: -1;
+}
+

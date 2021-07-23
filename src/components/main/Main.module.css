@@ -1,0 +1,10 @@
+.main{
+    padding: 0;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    padding-top: 2.5%;
+    /* padding: 5%; */
+    border-style: solid;
+    width: 90vw;
+    min-width: 150px;
+}

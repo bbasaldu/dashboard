@@ -1,0 +1,14 @@
+
+.container{
+    position: relative;
+    min-width: 70px;
+    background-color: #9e8;
+    
+}
+.sidebar{
+    position: fixed;
+    background-color: #cb8;
+    width: 50px;
+    height: 100vh;
+    padding: 10px;
+}

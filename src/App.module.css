@@ -1,0 +1,12 @@
+.App {
+
+  background-color: #f9fafb;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+.layout{
+  display: flex;
+  flex-direction: row;
+}
+
