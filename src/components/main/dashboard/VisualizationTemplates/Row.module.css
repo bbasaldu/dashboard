@@ -4,12 +4,13 @@
 
     display: flex;
     flex-direction: row;
+    
     margin-top: 5%;
+    
     
 }
 
 .row{
-    
     width: 100%;
-    
+    margin-left: 5%;
 }

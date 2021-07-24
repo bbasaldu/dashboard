@@ -3,6 +3,7 @@ import LevelOneContainer from "./LevelOneContainer";
 import TitleCard from "./TitleCard";
 import VerticalSplitContainer from "./VerticalSplitContainer";
 import Headers from "./VisualizationTemplates/Headers";
+import LegendColor from "./VisualizationTemplates/LegendColor";
 import LineChart from "./VisualizationTemplates/LineChart";
 import PercentChange from "./VisualizationTemplates/PercentChange";
 import PieChart from "./VisualizationTemplates/PieChart";
@@ -50,15 +51,19 @@ const DashBoard = () => {
   const row4 = ["Label4", "114,000", "10%"]
 
   //fake data for pie chart and table legend
-  const pieChartHeaders = [" ", "Label", "Label Value"]
+  const pieChartHeaders = ["Legend", "Label", "Value"]
   const pieChartData = {
       total: 100,
-      data: [
+      pieData: [
           {label: 'label1', value: 25},
-          {label: 'label1', value: 25},
-          {label: 'label1', value: 25},
-          {label: 'label1', value: 25}
+          {label: 'label2', value: 25},
+          {label: 'label3', value: 25},
+          {label: 'label4', value: 25}
       ]
+  }
+  const pieColors = ['#2cd9d0',"#5eacc9", "#e4970f", "#cc3035"]
+  const color = (color) => {
+      return <LegendColor color={color}/>
   }
   return (
     <div className={classes.container}>
@@ -68,20 +73,20 @@ const DashBoard = () => {
       </LevelOneContainer>
       <LevelOneContainer>2</LevelOneContainer>
       <LevelOneContainer className={classes.levelOneGrowVertical}>
-            <TitleCard title="Table Label" />
+            <TitleCard title="Totals" />
           <VerticalSplitContainer>
           <Table className={classes.flexGrow}>
             <Headers headers={pieChartHeaders}/>
-            <Row data={["color", "label1", 25]}>
+            <Row data={[color(pieColors[0]), "label1", 25]}>
             </Row>
-            <Row data={["color", "label2", 25]}>
+            <Row data={[color(pieColors[1]), "label2", 25]}>
             </Row>
-            <Row data={["color", "label3", 25]}>
+            <Row data={[color(pieColors[2]), "label3", 50]}>
             </Row>
-            <Row data={["color", "label4", 25]}>
+            <Row data={[color(pieColors[3]), "label4", 25]}>
             </Row>
         </Table>
-        <PieChart/>
+        <PieChart id="pieChart1" data={pieChartData}/>
           </VerticalSplitContainer>
       </LevelOneContainer>
       <LevelOneContainer className={classes.levelOneGrowVertical}>

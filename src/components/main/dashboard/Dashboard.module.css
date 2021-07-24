@@ -1,7 +1,7 @@
 
 
 .container{
-    background-color: skyblue;
+    background-color: none;
     display: flex;
     flex-wrap: wrap;
     width: 100%;
