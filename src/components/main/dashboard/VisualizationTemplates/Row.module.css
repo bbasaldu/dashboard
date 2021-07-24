@@ -1,0 +1,15 @@
+.container {
+    padding: 1%;
+    /* border-radius: 50px; */
+
+    display: flex;
+    flex-direction: row;
+    margin-top: 5%;
+    
+}
+
+.row{
+    
+    width: 100%;
+    
+}

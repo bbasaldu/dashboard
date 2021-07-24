@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react"
+import { useEffect } from "react"
 import classes from './LineChart.module.css'
 import { buildLineChart } from "./d3Scripts/buildLineChart.js"
 const LineChart= (props) => {

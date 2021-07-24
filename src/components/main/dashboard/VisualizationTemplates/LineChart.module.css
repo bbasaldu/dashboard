@@ -12,7 +12,7 @@
     /* width: 10%;
     height: 10%; */
     border-radius: 5px;
-    background-color: #b9c5c7;
+    background-color: #051c1b;
     align-self: center;
     pointer-events: none;
     display: flex;
@@ -27,7 +27,6 @@
 .tooltipInner{
     position: relative;
     z-index: 1;
-    background-color: #b9c5c7;
     font-family: Helvetica;
     
     
@@ -38,7 +37,7 @@
     position: absolute;
     transform: rotate(45deg);
     border-radius: 1px;
-    background-color: #b9c5c7;
+    background-color: inherit;
     
     z-index: -1;
 }

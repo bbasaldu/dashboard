@@ -1,10 +1,11 @@
 import * as d3 from "d3";
-import { Delaunay } from "d3-delaunay";
 import classes from "./buildLineChart.module.css";
 
 
 const getBBox = (svg, text) => {
-  const temp = svg.append("text").text(text);
+  const temp = svg.append("text")
+    .text(text);
+
   const dim = temp.node().getBoundingClientRect();
   temp.remove();
   return dim;
@@ -53,9 +54,9 @@ export const buildLineChart = (id, data, options = null) => {
     bottom: tickSize + xTickDim.height, //default tick size is 6px, make room for labels under
     top: h * 0.05,
   };
-  const width = w - margin.left - margin.right;
+  const width = w - margin.right;
   const height = h - margin.bottom;
-
+  //range from left margin(0+left margin) to right margin(width-right margin)
   const xScale = d3
     .scaleTime()
     .domain([new Date("2020-01-01 00:00:00"), new Date("2020-12-30 00:00:00")])
@@ -173,6 +174,7 @@ export const buildLineChart = (id, data, options = null) => {
   const yOffset = h*0.05
   const tooltipDesc = d3.select(`#${id}_tooltip_desc`)
   const tooltipValue = d3.select(`#${id}_tooltip_value`)
+  tooltipDesc.style('color', theme.second)
   tooltipValue.style('color', 'white').style('font-weight', 'bold')
   const setToolTip = (index) => {
     const x = points[index][0]

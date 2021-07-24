@@ -7,8 +7,21 @@
     width: 100%;
     padding: 0;
     margin: 0;
+
+    justify-content: center;
 }
 
-.titleContainer{
-
+.levelOneGrowVertical {
+    min-width: 150px;
+    min-height: 100px;
+    width: 400px;
+    height: auto !important;
+    max-width: 600px;
+    max-height:none !important; 
 }
+
+.flexGrow{
+    flex-grow: 1;
+}
+
+

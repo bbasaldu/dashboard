@@ -1,6 +1,13 @@
 import classes from "./Dashboard.module.css";
 import LevelOneContainer from "./LevelOneContainer";
+import TitleCard from "./TitleCard";
+import VerticalSplitContainer from "./VerticalSplitContainer";
+import Headers from "./VisualizationTemplates/Headers";
 import LineChart from "./VisualizationTemplates/LineChart";
+import PercentChange from "./VisualizationTemplates/PercentChange";
+import PieChart from "./VisualizationTemplates/PieChart";
+import Row from "./VisualizationTemplates/Row";
+import Table from "./VisualizationTemplates/Table";
 const DashBoard = () => {
   //make array of 12 objects for each month and 30-31 elements to simulate data for each end of the day for each month
   const randomInteger = (min, max) => {
@@ -8,7 +15,7 @@ const DashBoard = () => {
   };
 
   
-
+  //fake data for line chart
   const lineChartData = [
     {
       label: "line1",
@@ -33,15 +40,68 @@ const DashBoard = () => {
       ],
     },
   ];
+  const len = lineChartData[0].pointData.length
+
+  //fake data for table
+  const headers = ["Label", "Value", "% from Total", "% Change"]
+  const row1 = ["Label1", "80,000", "20%"]
+  const row2 = ["Label2", "60,000", "42%"]
+  const row3 = ["Label3", "3,400", "12%"]
+  const row4 = ["Label4", "114,000", "10%"]
+
+  //fake data for pie chart and table legend
+  const pieChartHeaders = [" ", "Label", "Label Value"]
+  const pieChartData = {
+      total: 100,
+      data: [
+          {label: 'label1', value: 25},
+          {label: 'label1', value: 25},
+          {label: 'label1', value: 25},
+          {label: 'label1', value: 25}
+      ]
+  }
   return (
     <div className={classes.container}>
       <LevelOneContainer>
-        <div>Title</div>
+        <TitleCard title="Year Total" value={lineChartData[0].pointData[len-1].y}/>
         <LineChart id="lineChart1" data={lineChartData} />
       </LevelOneContainer>
       <LevelOneContainer>2</LevelOneContainer>
-      <LevelOneContainer>3</LevelOneContainer>
-      <LevelOneContainer>4</LevelOneContainer>
+      <LevelOneContainer className={classes.levelOneGrowVertical}>
+            <TitleCard title="Table Label" />
+          <VerticalSplitContainer>
+          <Table className={classes.flexGrow}>
+            <Headers headers={pieChartHeaders}/>
+            <Row data={["color", "label1", 25]}>
+            </Row>
+            <Row data={["color", "label2", 25]}>
+            </Row>
+            <Row data={["color", "label3", 25]}>
+            </Row>
+            <Row data={["color", "label4", 25]}>
+            </Row>
+        </Table>
+        <PieChart/>
+          </VerticalSplitContainer>
+      </LevelOneContainer>
+      <LevelOneContainer className={classes.levelOneGrowVertical}>
+        <TitleCard title="Table Label" />
+        <Table>
+            <Headers headers={headers}/>
+            <Row data={row1}>
+                <PercentChange value={`${24}%`} positive={true}/>
+            </Row>
+            <Row data={row2}>
+                <PercentChange value={`${24}%`} positive={true}/>
+            </Row>
+            <Row data={row3}>
+                <PercentChange value={`${24}%`} positive={true}/>
+            </Row>
+            <Row data={row4}>
+                <PercentChange value={`${24}%`} positive={false}/>
+            </Row>
+        </Table>
+      </LevelOneContainer>
     </div>
   );
 };
