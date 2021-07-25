@@ -1,6 +1,6 @@
 .container{
-    width: 3vh;
-    height: 3vh;
+    width: 2vmax;
+    height: 2vmax;
     border-radius: 5px;
     margin-left: 25%;
 }

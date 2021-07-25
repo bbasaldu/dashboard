@@ -7,7 +7,9 @@ import LegendColor from "./VisualizationTemplates/LegendColor";
 import LineChart from "./VisualizationTemplates/LineChart";
 import PercentChange from "./VisualizationTemplates/PercentChange";
 import PieChart from "./VisualizationTemplates/PieChart";
+import QuadRowCard from "./VisualizationTemplates/QuadRowCard";
 import Row from "./VisualizationTemplates/Row";
+import StatCard from "./VisualizationTemplates/StatCard";
 import Table from "./VisualizationTemplates/Table";
 const DashBoard = () => {
   //make array of 12 objects for each month and 30-31 elements to simulate data for each end of the day for each month
@@ -71,7 +73,16 @@ const DashBoard = () => {
         <TitleCard title="Year Total" value={lineChartData[0].pointData[len-1].y}/>
         <LineChart id="lineChart1" data={lineChartData} />
       </LevelOneContainer>
-      <LevelOneContainer>2</LevelOneContainer>
+      <LevelOneContainer className={classes.levelOneBlank}>
+          <QuadRowCard>
+            <StatCard value="43.4%" percentValue={`${12}%`} positive={true}/>
+            <StatCard value="43.4%" percentValue={`${12}%`} positive={true}/>
+          </QuadRowCard>
+          <QuadRowCard>
+            <StatCard value="43.4%" percentValue={`${12}%`} positive={true}/>
+            <StatCard value="43.4%" percentValue={`${12}%`} positive={true}/>
+          </QuadRowCard>
+      </LevelOneContainer>
       <LevelOneContainer className={classes.levelOneGrowVertical}>
             <TitleCard title="Totals" />
           <VerticalSplitContainer>

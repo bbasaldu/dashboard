@@ -66,7 +66,7 @@ export const buildPieChart = (id, data, options = null) => {
         .attr('text-anchor', 'middle')
         .attr('fill', colors[0])
         .attr('font-weight', 'bold')
-        .attr('font-size', '5vmin')
+        .attr('font-size', '3vmax')
     
     g.append('text')
         .text('Total')
@@ -74,7 +74,7 @@ export const buildPieChart = (id, data, options = null) => {
         .attr('dy', '1.5em')
         .attr('fill','#C0C0C0')
         .attr('font-weight', 'bold')
-        .attr('font-size', '2vmin')
+        .attr('font-size', '2vmax')
 
     
 

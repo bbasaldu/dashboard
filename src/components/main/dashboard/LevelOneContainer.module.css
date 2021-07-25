@@ -3,15 +3,11 @@
     min-height: 100px;
     width: 400px;
     height: 300px;
-    max-width: 600px;
-    max-height: 500px;
-    /* width: 40vmax;
-    height: 20vmax; */
+    max-width: 500px;
+    max-height: 450px;
     
     background-color: white;
-    margin: 2.5%;
-    /* margin-right: 2.5%; */
-    /* margin-top: 2.5%; */
+    margin: 1%;
     
     flex-grow: 1;
 
