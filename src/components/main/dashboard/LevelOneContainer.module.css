@@ -3,8 +3,9 @@
     min-height: 100px;
     width: 400px;
     height: 300px;
-    max-width: 500px;
-    max-height: 450px;
+    max-width: 600px;
+    max-height: 550px;
+    flex-basis: 500px;
     
     background-color: white;
     margin: 1%;

@@ -4,9 +4,15 @@
   flex-direction: row;
 }
 .arrowUp {
-  margin-left: 10%;
+  margin-top: 0.6vmin;
+  /* was 10% */
+  margin-left: 5px;
   width: 0;
   height: 0;
+  min-height: 1px;
+  min-width: 1px;
+  max-height: 5px;
+  max-width: 5px;
   border-left: 1.2vmin solid transparent;
   border-right: 1.2vmin solid transparent;
 
@@ -14,12 +20,16 @@
 }
 
 .arrowDown {
-  margin-left: 10%;
+  margin-top: 0.6vmin;
+  margin-left: 5px;
   width: 0;
   height: 0;
+  min-height: 1px;
+  min-width: 1px;
+  max-height: 5px;
+  max-width: 5px;
   border-left: 1.2vmin solid transparent;
   border-right: 1.2vmin solid transparent;
 
-  border-top: 1.2vmin solid #FF3131
-  ;
+  border-top: 1.2vmin solid #ff3131;
 }

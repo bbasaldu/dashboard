@@ -9,6 +9,6 @@
     height: 20%;
     color: #051c1b;
     font-weight: 600;
-    font-size: 2vw;
+    font-size: clamp(15px, 2vw, 40px);
 }
 

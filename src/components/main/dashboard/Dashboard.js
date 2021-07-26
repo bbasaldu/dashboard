@@ -11,13 +11,20 @@ import QuadRowCard from "./VisualizationTemplates/QuadRowCard";
 import Row from "./VisualizationTemplates/Row";
 import StatCard from "./VisualizationTemplates/StatCard";
 import Table from "./VisualizationTemplates/Table";
-const DashBoard = () => {
-  //make array of 12 objects for each month and 30-31 elements to simulate data for each end of the day for each month
-  const randomInteger = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
+//icons
+import bookIcon from '../../../assets/fi-rr-book.svg'
+import timeIcon from '../../../assets/fi-rr-clock.svg'
+import usersIcon from '../../../assets/fi-rr-users.svg'
+import screenIcon from '../../../assets/fi-rr-screen.svg'
 
-  
+
+const DashBoard = () => {
+
+  const getIcon = (icon) => {
+    return (
+      <img src={icon} alt={'svgIcon'} />
+    )
+  }
   //fake data for line chart
   const lineChartData = [
     {
@@ -75,12 +82,20 @@ const DashBoard = () => {
       </LevelOneContainer>
       <LevelOneContainer className={classes.levelOneBlank}>
           <QuadRowCard>
-            <StatCard value="43.4%" percentValue={`${12}%`} positive={true}/>
-            <StatCard value="43.4%" percentValue={`${12}%`} positive={true}/>
+            <StatCard value="43.4%" percentValue={`${12}%`} positive={true} icon={getIcon(screenIcon)}>
+              Rate of Something
+            </StatCard>
+            <StatCard value="4.2" percentValue={`${1.2}%`} positive={true} icon={getIcon(bookIcon)}>
+              Pages Read per Vist
+            </StatCard>
           </QuadRowCard>
           <QuadRowCard>
-            <StatCard value="43.4%" percentValue={`${12}%`} positive={true}/>
-            <StatCard value="43.4%" percentValue={`${12}%`} positive={true}/>
+            <StatCard value="320K" percentValue={`${2.1}%`} positive={false} icon={getIcon(usersIcon)}>
+              Monthly Visitors
+            </StatCard>
+            <StatCard value="00:03:27" percentValue={`${2.4}%`} positive={false} icon={getIcon(timeIcon)}>
+              Avg. Time Spent
+            </StatCard>
           </QuadRowCard>
       </LevelOneContainer>
       <LevelOneContainer className={classes.levelOneGrowVertical}>
@@ -92,12 +107,72 @@ const DashBoard = () => {
             </Row>
             <Row data={[color(pieColors[1]), "label2", 25]}>
             </Row>
-            <Row data={[color(pieColors[2]), "label3", 50]}>
+            <Row data={[color(pieColors[2]), "label3", 25]}>
             </Row>
             <Row data={[color(pieColors[3]), "label4", 25]}>
             </Row>
         </Table>
         <PieChart id="pieChart1" data={pieChartData}/>
+          </VerticalSplitContainer>
+      </LevelOneContainer>
+      <LevelOneContainer className={classes.levelOneGrowVertical}>
+        <TitleCard title="Table Label" />
+        <Table>
+            <Headers headers={headers}/>
+            <Row data={row1}>
+                <PercentChange value={`${24}%`} positive={true}/>
+            </Row>
+            <Row data={row2}>
+                <PercentChange value={`${24}%`} positive={true}/>
+            </Row>
+            <Row data={row3}>
+                <PercentChange value={`${24}%`} positive={true}/>
+            </Row>
+            <Row data={row4}>
+                <PercentChange value={`${24}%`} positive={false}/>
+            </Row>
+        </Table>
+      </LevelOneContainer>
+
+      
+
+      <LevelOneContainer>
+        <TitleCard title="Year Total" value={lineChartData[0].pointData[len-1].y}/>
+        <LineChart id="lineChart2" data={lineChartData} />
+      </LevelOneContainer>
+      <LevelOneContainer className={classes.levelOneBlank}>
+          <QuadRowCard>
+            <StatCard value="43.4%" percentValue={`${12}%`} positive={true} icon={getIcon(screenIcon)}>
+              Rate of Something
+            </StatCard>
+            <StatCard value="4.2" percentValue={`${1.2}%`} positive={true} icon={getIcon(bookIcon)}>
+              Pages Read per Vist
+            </StatCard>
+          </QuadRowCard>
+          <QuadRowCard>
+            <StatCard value="320K" percentValue={`${2.1}%`} positive={false} icon={getIcon(usersIcon)}>
+              Monthly Visitors
+            </StatCard>
+            <StatCard value="00:03:27" percentValue={`${2.4}%`} positive={false} icon={getIcon(timeIcon)}>
+              Avg. Time Spent
+            </StatCard>
+          </QuadRowCard>
+      </LevelOneContainer>
+      <LevelOneContainer className={classes.levelOneGrowVertical}>
+            <TitleCard title="Totals" />
+          <VerticalSplitContainer>
+          <Table className={classes.flexGrow}>
+            <Headers headers={pieChartHeaders}/>
+            <Row data={[color(pieColors[0]), "label1", 25]}>
+            </Row>
+            <Row data={[color(pieColors[1]), "label2", 25]}>
+            </Row>
+            <Row data={[color(pieColors[2]), "label3", 25]}>
+            </Row>
+            <Row data={[color(pieColors[3]), "label4", 25]}>
+            </Row>
+        </Table>
+        <PieChart id="pieChart2" data={pieChartData}/>
           </VerticalSplitContainer>
       </LevelOneContainer>
       <LevelOneContainer className={classes.levelOneGrowVertical}>

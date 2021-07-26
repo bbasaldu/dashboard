@@ -17,7 +17,7 @@
 .middle{
     margin-bottom: 2.5%;
     font-weight: 600;
-    font-size: 3vw;
+    font-size: clamp(20px,3vw,50px);
     flex-grow: 1;
 }
 .bottom{
@@ -27,6 +27,7 @@
     margin-bottom: 2.5%;
     flex-grow: 1;
     color: #C0C0C0;
+    font-size: 16px;
 }
 
 .container:nth-of-type(1){
@@ -36,5 +37,31 @@
 .flexEnd{
     justify-content: flex-end;
 }
+
+img {
+    min-height: 15px;
+    min-width: 15px;
+    width: 2vmax;
+    
+    height: 2vmax;
+    
+    max-height: 25px;
+    max-width: 25px;
+
+}
+
+
+.helpIcon{
+    min-height: 5px;
+    min-width: 5px;
+    width: 2vmax;
+    
+    height: 2vmax;
+    
+    max-height: 15px;
+    max-width: 15px;
+
+}
+
 
 
