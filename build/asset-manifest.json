@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.eed23419.chunk.css",
+    "main.js": "/static/js/main.49b87ce8.chunk.js",
+    "runtime-main.js": "/static/js/runtime-main.8add3404.js",
+    "static/js/2.ac85519a.chunk.js": "/static/js/2.ac85519a.chunk.js",
+    "static/js/3.17272bb3.chunk.js": "/static/js/3.17272bb3.chunk.js",
+    "index.html": "/index.html",
+    "static/js/2.ac85519a.chunk.js.LICENSE.txt": "/static/js/2.ac85519a.chunk.js.LICENSE.txt",
+    "static/media/fi-rr-book.f8977565.svg": "/static/media/fi-rr-book.f8977565.svg",
+    "static/media/fi-rr-clock.04fbd2c6.svg": "/static/media/fi-rr-clock.04fbd2c6.svg",
+    "static/media/fi-rr-interrogation.da36bdf3.svg": "/static/media/fi-rr-interrogation.da36bdf3.svg",
+    "static/media/fi-rr-screen.8f5af3df.svg": "/static/media/fi-rr-screen.8f5af3df.svg",
+    "static/media/fi-rr-users.7a091b6e.svg": "/static/media/fi-rr-users.7a091b6e.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8add3404.js",
+    "static/js/2.ac85519a.chunk.js",
+    "static/css/main.eed23419.chunk.css",
+    "static/js/main.49b87ce8.chunk.js"
+  ]
+}
