@@ -62,7 +62,7 @@ export const buildLineChart = (id, data, options = null, transition = true) => {
   //range from left margin(0+left margin) to right margin(width-right margin)
   const xScale = d3
     .scaleTime()
-    .domain([new Date("2020-01-01 00:00:00"), new Date("2020-12-30 00:00:00")])
+    .domain([new Date("2020-01-01T00:00:00"), new Date("2020-12-30T00:00:00")])//Need ISO 8601 format
     .range([margin.left, width])
     .nice();
 
@@ -81,9 +81,6 @@ export const buildLineChart = (id, data, options = null, transition = true) => {
     const id = d3.timeFormat("%b%y")(d);
     return id;
   });
-
-  ///console.log(xAxis.selectAll('text')._groups[0][xAxisText.size()-1].remove())
-
   const yScale = d3
     .scaleLinear()
     .domain([yMin, yMax])
@@ -110,15 +107,14 @@ export const buildLineChart = (id, data, options = null, transition = true) => {
     .attr("transform", "translate(0," + height + ")")
     .call(xGridLines().tickSize(-height).tickFormat(""));
   grid.selectAll("line").attr("stroke", theme.second);
-
-  const line = d3
-    .line()
+  
+  const line = d3.line()
     .x((d, i) => xScale(d.x))
     .y((d, i) => yScale(d.y))
     //https://github.com/d3/d3-shape#curves
     .curve(d3.curveCatmullRom.alpha(0.5));
-  // .curve(d3.curveBasis);
-
+    //.curve(d3.curveBasis);
+  
   let path = svg
     .append("path")
     .attr("id", "path")
@@ -127,6 +123,7 @@ export const buildLineChart = (id, data, options = null, transition = true) => {
     .attr("stroke", theme.third)
     .attr("stroke-width", "2")
     .attr("stroke-linecap", "round")
+    
     .attr("d", line);
 
   if (transition) {
