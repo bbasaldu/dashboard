@@ -15,7 +15,7 @@ function App() {
   return (
     <div className={classes.App}>
       <div className={classes.layout}>
-        <SideBar/>
+        {/* <SideBar/> */}
         <Main/>
       </div>
     </div>

@@ -39,8 +39,8 @@ export const buildLineChart = (id, data, options = null, transition = true) => {
     .attr("width", w)
     .attr("height", h);
 
+
   //some configurable options
-  const fontSize = "1vmax";
   const transitionTime = 1000;
   const transitionEase = d3.easeQuadOut;
   const yTicks = 5;
@@ -52,8 +52,8 @@ export const buildLineChart = (id, data, options = null, transition = true) => {
   const yTickDim = getBBox(svg, yTickArray[yTickArray.length - 1] + "");
   const margin = {
     //ticksize is tick line length, tickdim is largest label dimension to fit label
-    left: tickSize + yTickDim.width + w * 0.01,
-    right: xTickDim.width / 2, //half of label width since label goes past end of axis line
+    left: tickSize + yTickDim.width + w * 0.02,
+    right: xTickDim.width / 2 + w * 0.02, //half of label width since label goes past end of axis line
     bottom: tickSize + xTickDim.height, //default tick size is 6px, make room for labels under
     top: h * 0.05,
   };
@@ -71,7 +71,6 @@ export const buildLineChart = (id, data, options = null, transition = true) => {
     .attr("class", classes.xAxis)
     .attr("id", `${id}_xAxis`)
     .attr("transform", `translate(${0}, ${height})`)
-    .style("font-size", fontSize)
     .call(
       d3.axisBottom(xScale).tickSize(tickSize).tickFormat(d3.timeFormat("%b"))
     );
@@ -92,7 +91,6 @@ export const buildLineChart = (id, data, options = null, transition = true) => {
     .attr("class", classes.yAxis)
     .attr("id", `${id}_yAxis`)
     .attr("transform", `translate(${margin.left}, ${0})`)
-    .style("font-size", fontSize)
     .call(d3.axisLeft(yScale).tickSize(tickSize).ticks(yTicks));
   yAxis.selectAll("line").attr("stroke", theme.first);
 

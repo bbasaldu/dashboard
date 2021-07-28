@@ -1,3 +1,6 @@
 .selectbar{
-    background-color: #8ca;
+    background-color: inherit;
+    text-align: center;
+    border-bottom-style: solid;
+    border-bottom-width: 0.5px;
 }

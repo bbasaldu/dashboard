@@ -78,7 +78,7 @@ export const buildPieChart = (id, data, options = null, transition = true) => {
     .attr("text-anchor", "middle")
     .attr("fill", colors[0])
     .attr("font-weight", "bold")
-    .attr("font-size", "clamp(30px, 4vmax, 50px)");
+    .attr("font-size", "clamp(40px, 2vmax, 50px)");
 
   g.append("text")
     .text("Total")
@@ -86,7 +86,7 @@ export const buildPieChart = (id, data, options = null, transition = true) => {
     .attr("dy", "1.5em")
     .attr("fill", "#C0C0C0")
     .attr("font-weight", "bold")
-    .style("font-size", "clamp(15px, 1vmax, 30px)");
+    .style("font-size", "clamp(20px, 1vmax, 30px)");
 };
 export const removePieChart = (id) => {
   const container = d3.select(`#${id}`);

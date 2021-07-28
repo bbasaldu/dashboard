@@ -24,3 +24,6 @@
     height: 100%;
     width: 100%;
 }
+.svg text{
+    font-size: clamp(10px, 1vw, 16px)
+}

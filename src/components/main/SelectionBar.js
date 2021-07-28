@@ -2,7 +2,8 @@ import classes from './SelectionBar.module.css'
 const SelectionBar = () => {
     return (
         <div className={classes.selectbar}>
-            selection bar
+            Analytics Dashboard
+            {/* selection bar */}
         </div>
     )
 }
