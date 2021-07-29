@@ -1,0 +1,20 @@
+.container {
+  position: absolute;
+  background-color: #051c1b;
+  color: white;
+  padding: 1em;
+  border-radius: 10px;
+  
+  /* opacity: 0; */
+}
+.container::before {
+  content: " ";
+  position: absolute;
+  display: block;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+
+  border-top: 7px solid #051c1b;
+  left: calc(50% - 7px);
+  top: calc(100%);
+}

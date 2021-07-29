@@ -1,0 +1,47 @@
+.svg {
+    width: 100%;
+    height: 100%;
+}
+.svg text{
+    font-family: Helvetica;
+    font-size: clamp(10px, 2vw, 16px);
+}
+
+
+.xAxis line{
+    opacity: 0;
+}
+.xAxis path{
+    opacity: 0;
+}
+
+
+
+
+.yAxis line{
+    opacity: 0;
+}
+.yAxis path{
+    opacity: 0;
+}
+
+.tooltip {
+    position: absolute;
+    background-color: #051c1b;
+    color: white;
+    padding: 1em;
+    border-radius: 10px;
+  
+    /* opacity: 0; */
+  }
+  .tooltip::before {
+    content: " ";
+    position: absolute;
+    display: block;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+  
+    border-top: 7px solid #051c1b;
+    left: calc(50% - 7px);
+    top: calc(100%);
+  }

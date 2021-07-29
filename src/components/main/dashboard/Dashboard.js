@@ -16,6 +16,7 @@ import bookIcon from "../../../assets/fi-rr-book.svg";
 import timeIcon from "../../../assets/fi-rr-clock.svg";
 import usersIcon from "../../../assets/fi-rr-users.svg";
 import screenIcon from "../../../assets/fi-rr-screen.svg";
+import BarChart from "./VisualizationTemplates/BarChart";
 
 const DashBoard = () => {
   const getIcon = (icon) => {
@@ -69,6 +70,16 @@ const DashBoard = () => {
   const color = (color) => {
     return <LegendColor color={color} />;
   };
+  //fake data for simple bar chart
+  const barChartData = [
+    {label: 'A', value: 10},
+    {label: 'B', value: 15},
+    {label: 'C', value: 20},
+    {label: 'D', value: 10},
+    {label: 'E', value: 13},
+    {label: 'F', value: 4},
+    {label: 'G', value: 16},
+]
   return (
     <div className={classes.container}>
       <LevelOneContainer>
@@ -150,10 +161,10 @@ const DashBoard = () => {
 
       <LevelOneContainer>
         <TitleCard
-          title="Year Total"
-          value={lineChartData[0].pointData[len - 1].y}
+          title="Max Value"
+          value={20}
         />
-        <LineChart id="lineChart2" data={lineChartData} />
+        <BarChart id="barChart1" data={barChartData}/>
       </LevelOneContainer>
       <LevelOneContainer className={classes.levelOneBlank}>
         <QuadRowCard>
