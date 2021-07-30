@@ -19,9 +19,6 @@ import screenIcon from "../../../assets/fi-rr-screen.svg";
 import BarChart from "./VisualizationTemplates/BarChart";
 
 const DashBoard = () => {
-  const getIcon = (icon) => {
-    return <img src={icon} alt={"svgIcon"} />;
-  };
   //fake data for line chart
   const lineChartData = [
     {

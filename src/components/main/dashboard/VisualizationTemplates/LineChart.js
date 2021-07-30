@@ -2,7 +2,6 @@ import { useEffect, useRef} from "react";
 import classes from "./LineChart.module.css";
 import { buildLineChart, removeLineChart } from "./d3Scripts/buildLineChart.js";
 import { useSelector } from "react-redux";
-
 //https://stackoverflow.com/a/22480938
 //couldn't figure out a way to do this on my own
 const isScrolledIntoView = (el) => {
@@ -49,20 +48,6 @@ const LineChart = (props) => {
   }, [props]);
   return (
     <div className={classes.container} id={props.id} ref={ref}>
-      <div className={classes.tooltip} id={`${props.id}_tooltip`}>
-        <div
-          className={classes.tooltipArrow}
-          id={`${props.id}_tooltip_arrow`}
-        ></div>
-        <div
-          className={classes.tooltipInner}
-          id={`${props.id}_tooltip_value`}
-        ></div>
-        <div
-          className={classes.tooltipinner}
-          id={`${props.id}_tooltip_desc`}
-        ></div>
-      </div>
     </div>
   );
 };

@@ -9,6 +9,16 @@ const getBBox = (svg, text) => {
 };
 export const buildBarChart = (id, data, options = null, transition = true) => {
   const { theme } = options;
+  //tooltip - for some reason css top, left dont affect it so i have to set it here
+  //could increase performance(is it negligable?) by creating tooltip in react component and having it persist
+  const tooltip = d3
+  .select("body")
+  .append("div")
+  .attr("class", classes.tooltip)
+  .attr("id", `${id}_tooltip`)
+  .style("opacity", 0)
+  .style('top', '0px')
+  .style('left', '0px')
 
   const container = d3.select(`#${id}`);
 
@@ -70,37 +80,15 @@ export const buildBarChart = (id, data, options = null, transition = true) => {
       .attr("rx", 20)
       .attr("fill", theme.fourth);
   };
-  const tooltip = d3
-    .select("body")
-    .append("div")
-    .attr("class", classes.tooltip)
-    .attr("id", `${id}_tooltip`)
-    .style("opacity", 0);
+  
+  //might need getCoords function from here in the future
   //https://javascript.info/coordinates
-  function getCoords(elem) {
-    let box = elem.getBoundingClientRect();
-
-    return {
-      top: box.top + window.pageYOffset,
-      right: box.right + window.pageXOffset,
-      bottom: box.bottom + window.pageYOffset,
-      left: box.left + window.pageXOffset,
-      x: box.x,
-      y: box.y,
-    };
-  }
-  const showToolTip = (d) => {
-    const svgDim = getCoords(svg.node());
-    //need to fix this
-    //that random value might be width of text but also i need a better way of doing this
+  const showToolTip = (mouse, d) => {
+    const tooltipDim = tooltip.node().getBoundingClientRect();
     tooltip
       .html(d.value)
-      .style("opacity", 1)
-      .style(
-        "left",
-        `${svgDim.left - 26 + xScale(d.label) + xScale.bandwidth() / 2}px`
-      )
-      .style("top", `${svgDim.top + (yScale(d.value) - 50)}px`);
+      .style("left", `${mouse[0] - tooltipDim.width / 2}px`)
+      .style("top", `${mouse[1] - tooltipDim.height - 7}px`); //y - ttheight - arrow length(css)
   };
 
   const changeData = (newData) => {
@@ -134,6 +122,7 @@ export const buildBarChart = (id, data, options = null, transition = true) => {
     } else {
       enter
         .append("rect")
+        .attr("class", `${id}_enter_rects`)
         .attr("x", (d) => xScale(d.label))
         .attr("y", (d) => yScale(d.value))
         .attr("width", xScale.bandwidth())
@@ -146,16 +135,23 @@ export const buildBarChart = (id, data, options = null, transition = true) => {
   buildBottles();
   const rects = changeData(data);
 
-  rects.on("mouseenter", (ev, d) => {
-    // const mouse = d3.pointer(ev, svg)
-    // const mouse = [ev.pageX, ev.pageY]
-    showToolTip(d);
-  });
-  rects.on("mouseleave", () => {
-    tooltip.style("opacity", 0);
-  });
+  //for highlighting bar value with tooltip
+  rects
+    .on("mouseenter", () => {
+      tooltip.style('opacity', 1)
+    })
+    .on("mousemove", (ev, d) => {
+      const mouse = d3.pointer(ev, svg);
+      showToolTip(mouse, d);
+    })
+    .on("mouseleave", () => {
+        tooltip.style("opacity", 0);
+    });
+
 };
 export const removeBarChart = (id) => {
   const container = d3.select(`#${id}`);
+  //to make sure we dont redraw it
+  d3.select(`#${id}_tooltip`).remove()
   container.selectAll("svg").remove();
 };

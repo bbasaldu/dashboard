@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import classes from "./BarChart.module.css";
 import { buildBarChart, removeBarChart } from "./d3Scripts/buildBarChart";
-import ToolTip from "./ToolTip";
 const BarChart = (props) => {
   const resized = useSelector((state) => state.resizeState.resized);
   //on resize

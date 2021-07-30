@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 import classes from "./buildLineChart.module.css";
 
-const getBBox = (svg, text) => {
+const getElemBBox = (svg, text) => {
   const temp = svg.append("text").text(text);
 
   const dim = temp.node().getBoundingClientRect();
@@ -12,7 +12,21 @@ const getBBox = (svg, text) => {
 export const buildLineChart = (id, data, options = null, transition = true) => {
   
   const { theme } = options;
-
+  //tooltip
+  const tooltip = d3
+  .select("body")
+  .append("div")
+  .attr("class", classes.tooltip)
+  .attr("id", `${id}_tooltip`)
+  .style("opacity", 0)
+  .style('top', '0px')
+  .style('left', '0px')
+  tooltip.append('div')
+    .attr('id', `${id}_tooltip_top`)
+    .attr('class', classes.tooltipTop)
+  tooltip.append('div')
+    .attr('id', `${id}_tooltip_bottom`)
+    .attr('class', classes.tooltipBottom)
   const months = [
     "Jan",
     "Feb",
@@ -45,11 +59,11 @@ export const buildLineChart = (id, data, options = null, transition = true) => {
   const transitionEase = d3.easeQuadOut;
   const yTicks = 5;
   const tickSize = 6;
-  const xTickDim = getBBox(svg, months[0] + "");
+  const xTickDim = getElemBBox(svg, months[0] + "");
   const yMin = d3.min(data, (line) => d3.min(line.pointData, (d) => d.y));
   const yMax = d3.max(data, (line) => d3.max(line.pointData, (d) => d.y));
   const yTickArray = d3.ticks(0, yMax, 10);
-  const yTickDim = getBBox(svg, yTickArray[yTickArray.length - 1] + "");
+  const yTickDim = getElemBBox(svg, yTickArray[yTickArray.length - 1] + "");
   const margin = {
     //ticksize is tick line length, tickdim is largest label dimension to fit label
     left: tickSize + yTickDim.width + w * 0.02,
@@ -169,36 +183,33 @@ export const buildLineChart = (id, data, options = null, transition = true) => {
       pointMarker.attr("transform", `translate(${x}, ${y})`);
     }
   };
+  //used this function to help me out
+  //https://javascript.info/coordinates
+  const getCoords = (elem) => {
+    const box = elem.getBoundingClientRect();
+  
+    return {
+      top: box.top + window.pageYOffset,
+      right: box.right + window.pageXOffset,
+      bottom: box.bottom + window.pageYOffset,
+      left: box.left + window.pageXOffset
+    };
+  }
 
   //for tool tip
-  const svgDim = svg.node().getBoundingClientRect();
-  const yOffset = h * 0.05;
-  const tooltipDesc = d3.select(`#${id}_tooltip_desc`);
-  const tooltipValue = d3.select(`#${id}_tooltip_value`);
-  tooltipDesc.style("color", theme.second);
-  tooltipValue.style("color", "white").style("font-weight", "bold");
   const setToolTip = (index) => {
     const x = points[index][0];
     const y = points[index][1];
-    const tooltip = d3.select(`#${id}_tooltip`);
-    const tooltipArrow = d3.select(`#${id}_tooltip_arrow`);
-    const tooltipArrowDim = tooltipArrow.node().getBoundingClientRect();
-    const tooltipDim = tooltip.node().getBoundingClientRect();
-
-    tooltipValue.text(data[0].pointData[index].y);
-    tooltipDesc.text(
-      d3.timeFormat("Numbers for %m/%d/%y")(data[0].pointData[index].x)
-    );
-    //all those variables in left and top are to move tooltip div relative to svg
+    const tooltipDim = tooltip.node().getBoundingClientRect()
+    const svgDim = getCoords(svg.node())
+    //to translate div tooltip to svg coords
+    //without pageoffset the tooltip height goes crazy
     tooltip
-      .style("opacity", 1)
-      .style("left", `${svgDim.x + x - tooltipDim.width / 2}px`)
-      .style("top", `${svgDim.y + y - tooltipDim.height - yOffset}px`);
-    tooltipArrow
-      .style("opacity", 1)
-      .style("width", `${h * 0.03}px`)
-      .style("height", `${h * 0.03}px`)
-      .style("top", `${tooltipDim.height - tooltipArrowDim.height / 2}px`);
+      .style('opacity', 1)
+      .style(`left`, `${svgDim.left + x - tooltipDim.width/2}px`)
+      .style('top', `${svgDim.top + y - tooltipDim.height - 7 - 14}px`)//...-arrow height(css) - extra offset
+    d3.select(`#${id}_tooltip_top`).html(data[0].pointData[index].y)
+    d3.select(`#${id}_tooltip_bottom`).html(d3.timeFormat("Numbers for %m/%d/%y")(data[0].pointData[index].x))
   };
   //for highlighting current month label
   let lastLabel = null;
@@ -241,10 +252,10 @@ export const buildLineChart = (id, data, options = null, transition = true) => {
       .attr("stroke-width", 1)
       .attr("stroke-dasharray", 4);
   };
-
   svg.on("mousemove", (ev) => {
     const mouse = d3.pointer(ev);
     const index = delanauy.find(mouse[0], mouse[1]);
+    //only on index change - bug where on first run index is wrong
     setPointMarker(index);
     setToolTip(index);
     highlightMonth(index);
@@ -263,9 +274,8 @@ export const buildLineChart = (id, data, options = null, transition = true) => {
         .style("fill", theme.second);
     }
     lastLabel = null;
-    d3.select(`#${id}_YAxisHighlight`).remove();
-    d3.select(`#${id}_tooltip`).style("opacity", 0);
-    d3.select(`#${id}_tooltip_arrow`).style("opacity", 0);
+    tooltip
+      .style('opacity', 0)
   });
 
   const thisChart = {
@@ -276,6 +286,8 @@ export const buildLineChart = (id, data, options = null, transition = true) => {
 
 export const removeLineChart = (id) => {
   const container = d3.select(`#${id}`);
+  //remove tooltip since it will rerender
+  d3.select(`#${id}_tooltip`).remove()
   container.selectAll('svg').remove()
   
 };

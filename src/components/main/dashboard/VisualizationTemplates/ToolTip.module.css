@@ -4,8 +4,8 @@
   color: white;
   padding: 1em;
   border-radius: 10px;
-  
-  /* opacity: 0; */
+  pointer-events: none;
+  opacity: 1;
 }
 .container::before {
   content: " ";
@@ -17,4 +17,5 @@
   border-top: 7px solid #051c1b;
   left: calc(50% - 7px);
   top: calc(100%);
+  pointer-events: none;
 }
