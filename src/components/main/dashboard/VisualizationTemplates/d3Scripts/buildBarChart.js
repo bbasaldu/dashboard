@@ -7,8 +7,27 @@ const getBBox = (svg, text) => {
   temp.remove();
   return dim;
 };
+//helper function to return new filtered data based on some filters
+export const evalFilter = (filter, data, options) => {
+  const num = options.findIndex(d => d === filter)
+  let newData = Array.from(data)
+  if(num === 0){
+    //sort abc
+    newData.sort((a, b) => a.label.localeCompare(b.label))
+
+  }
+  else if(num === 1){
+    //sort asc
+    newData.sort((a,b) => a.value - b.value)
+  }
+  else if(num === 2){
+    //sort desc
+    newData.sort((a,b) => b.value - a.value)
+  }
+  return newData
+}
 export const buildBarChart = (id, data, options = null, transition = true) => {
-  const { theme } = options;
+  const { theme, selectionOptions } = options;
   //tooltip - for some reason css top, left dont affect it so i have to set it here
   //could increase performance(is it negligable?) by creating tooltip in react component and having it persist
   const tooltip = d3
@@ -45,7 +64,6 @@ export const buildBarChart = (id, data, options = null, transition = true) => {
   };
   const width = w - margin.right;
   const height = h - margin.bottom;
-
   const xScale = d3
     .scaleBand()
     .domain(data.map((d) => d.label))
@@ -67,9 +85,10 @@ export const buildBarChart = (id, data, options = null, transition = true) => {
     .call(d3.axisLeft(yScale));
 
   //bottle style for bars
+  const bottles = svg.append('g')
   const buildBottles = () => {
-    svg
-      .selectAll("bottoles")
+    bottles
+      .selectAll("bottles")
       .data(data)
       .enter()
       .append("rect")
@@ -91,24 +110,25 @@ export const buildBarChart = (id, data, options = null, transition = true) => {
       .style("top", `${mouse[1] - tooltipDim.height - 7}px`); //y - ttheight - arrow length(css)
   };
 
+  //handle data changes
+  const rectGroup = svg.append('g').attr('id', `${id}_rects`)
   const changeData = (newData) => {
-    svg
-      .selectAll("bars")
-      .data(data)
+    xScale.domain(newData.map(d => d.label))
+    xAxis.transition().duration(1000).call(d3.axisBottom(xScale))
+    rectGroup
+      .selectAll('rect')
+      .data(newData, d => d.label)
       .join(
         (enter) => handleEnter(enter),
-        (update) => {},
+        (update) => handleUpdate(update),
         (exit) => {}
-      );
-
-    return d3.selectAll(`.${id}_enter_rects`);
+      )
   };
-
+  //handling data updates
   const handleEnter = (enter) => {
     if (transition) {
       enter
         .append("rect")
-        .attr("class", `${id}_enter_rects`)
         .attr("x", (d) => xScale(d.label))
         .attr("width", xScale.bandwidth())
         .attr("y", (d) => height)
@@ -122,7 +142,6 @@ export const buildBarChart = (id, data, options = null, transition = true) => {
     } else {
       enter
         .append("rect")
-        .attr("class", `${id}_enter_rects`)
         .attr("x", (d) => xScale(d.label))
         .attr("y", (d) => yScale(d.value))
         .attr("width", xScale.bandwidth())
@@ -131,9 +150,24 @@ export const buildBarChart = (id, data, options = null, transition = true) => {
         .attr("fill", theme.third);
     }
   };
+
+  const handleUpdate = (update) => {
+    update
+      .transition().duration(1000)
+      .attr("x", (d) => xScale(d.label))
+  };
+  
+  
+
+
+
+
+
+
   svg.selectAll("text").attr("color", theme.second);
   buildBottles();
-  const rects = changeData(data);
+  changeData(data);
+  const rects = rectGroup.selectAll('rect')
 
   //for highlighting bar value with tooltip
   rects
@@ -148,10 +182,21 @@ export const buildBarChart = (id, data, options = null, transition = true) => {
         tooltip.style("opacity", 0);
     });
 
+
+    //listen for custom dropdown menu to change selection
+    //change data
+    d3.select(`#${id}_dropdown`).on('SelectionChange', (ev) => {
+      const newData = evalFilter(ev.target.innerHTML, data, selectionOptions)
+      changeData(newData)
+    })
+
 };
+
 export const removeBarChart = (id) => {
   const container = d3.select(`#${id}`);
   //to make sure we dont redraw it
   d3.select(`#${id}_tooltip`).remove()
   container.selectAll("svg").remove();
 };
+
+
