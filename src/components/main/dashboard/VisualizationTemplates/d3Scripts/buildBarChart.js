@@ -26,7 +26,7 @@ export const evalFilter = (filter, data, options) => {
   }
   return newData
 }
-export const buildBarChart = (id, data, options = null, transition = true) => {
+export const buildBarChart = (id, data, options = null, transition = true, onDataChange) => {
   const { theme, selectionOptions } = options;
   //tooltip - for some reason css top, left dont affect it so i have to set it here
   //could increase performance(is it negligable?) by creating tooltip in react component and having it persist
@@ -166,7 +166,7 @@ export const buildBarChart = (id, data, options = null, transition = true) => {
 
   svg.selectAll("text").attr("color", theme.second);
   buildBottles();
-  changeData(data);
+  //changeData(data);
   const rects = rectGroup.selectAll('rect')
 
   //for highlighting bar value with tooltip
@@ -182,12 +182,27 @@ export const buildBarChart = (id, data, options = null, transition = true) => {
         tooltip.style("opacity", 0);
     });
 
-
+    //wait for visible event to fire then remove listener as its only for inital animation
+    //then do animation
+    //if its being resized(transition = true),
+    if(transition){
+      const initalLoad = () => {
+        d3.select(`#${id}`).node().removeEventListener('isVisible', initalLoad)
+        changeData(data)
+        //.addEventListener('isVisible', null) //does this work?
+        
+      }
+      d3.select(`#${id}`).node().addEventListener('isVisible', initalLoad)
+    }
+    else{
+      changeData(data)
+    }
     //listen for custom dropdown menu to change selection
     //change data
     d3.select(`#${id}_dropdown`).on('SelectionChange', (ev) => {
       const newData = evalFilter(ev.target.innerHTML, data, selectionOptions)
       changeData(newData)
+      onDataChange(newData)
     })
 
 };
