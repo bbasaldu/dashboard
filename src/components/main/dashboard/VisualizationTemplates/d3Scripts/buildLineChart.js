@@ -282,7 +282,25 @@ export const buildLineChart = (id, data, options = null, transition = true) => {
   });
 
   //mobile event listeners
+
+  //TODO: create a way to scroll down without activating touchmove
+  //create timeout in touchstart
+  //if timeout function executes it will change some variable which 
+  //will be a boolean to run touchmove code, so prevent default only runs
+  //when finger is held down for 200-500ms
+  //in touchend clear timeout
+  //have visual indicator for telling
   svg
+  .on('touchstart', (ev) => {
+    ev.preventDefault()
+    const mouse = d3.pointers(ev)[0]//for some reason d3.pointer doesn't work for touchmove
+    const index = delanauy.find(mouse[0], yScale(yMin));
+    setToolTip(index);
+    tooltip
+      .style('opacity', 0)
+    
+    //navigator.vibrate(200) not on ios...
+  })
   .on("touchmove", (ev) => {
     ev.preventDefault()
     const mouse = d3.pointers(ev)[0]//for some reason d3.pointer doesn't work for touchmove
