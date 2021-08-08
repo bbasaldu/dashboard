@@ -13,7 +13,7 @@ function interpolateCustom(a,b, dp){
 }
 const animate = (last, current, ref) => {
   d3.select(ref)
-    .transition().duration(2000)
+    .transition().duration(2000).ease(d3.easePoly.exponent(3))
     .textTween(function() {
       return interpolateCustom(last, current, countDecimals(current))
     })

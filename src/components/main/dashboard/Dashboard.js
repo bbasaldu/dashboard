@@ -15,33 +15,48 @@ import bookIcon from "../../../assets/fi-rr-book.svg";
 import timeIcon from "../../../assets/fi-rr-clock.svg";
 import usersIcon from "../../../assets/fi-rr-users.svg";
 import screenIcon from "../../../assets/fi-rr-screen.svg";
-
 const DashBoard = () => {
   //fake data for line chart
-  const lineChartData = [
-    {
-      label: "line1",
-      pointData: [
-        { x: new Date("2020-01-01T00:00:00"), y: 40 },
-        { x: new Date("2020-01-10T00:00:00"), y: 80 },
-        { x: new Date("2020-01-20T00:00:00"), y: 30 },
+  const newLineData = [{label: 'line2', pointData: []}]
+  let count = 1
+  for(let i=1; i<=12; i++){
+    for(let j=1; j<=30; j++){
+      if(i===2 && j===30) continue //feb with day 30 yields an invalid date object
+      const month = (i<10)?`0${i}`:i
+      const day = (j<10)?`0${j}`:j
+      const date = {
+        x: new Date(`2020-${month}-${day}T00:00:00`),
+        y: Math.pow(count, 3)
+      }
+      newLineData[0].pointData.push(date)
+      count += 0.1
+    }
+  }
+  
+  // const lineChartData = [
+  //   {
+  //     label: "line1",
+  //     pointData: [
+  //       { x: new Date("2020-01-01T00:00:00"), y: 40 },
+  //       { x: new Date("2020-01-10T00:00:00"), y: 80 },
+  //       { x: new Date("2020-01-20T00:00:00"), y: 30 },
 
-        { x: new Date("2020-02-01T00:00:00"), y: 50 },
-        { x: new Date("2020-03-01T00:00:00"), y: 55 },
-        { x: new Date("2020-04-01T00:00:00"), y: 75 },
-        { x: new Date("2020-05-01T00:00:00"), y: 30 },
-        { x: new Date("2020-06-01T00:00:00"), y: 45 },
-        { x: new Date("2020-07-01T00:00:00"), y: 55 },
-        { x: new Date("2020-08-01T00:00:00"), y: 15 },
-        { x: new Date("2020-09-01T00:00:00"), y: 10 },
-        { x: new Date("2020-10-01T00:00:00"), y: 20 },
-        { x: new Date("2020-11-01T00:00:00"), y: 40 },
-        { x: new Date("2020-12-01T00:00:00"), y: 65 },
-        { x: new Date("2020-12-31T00:00:00"), y: 70 },
-      ],
-    },
-  ];
-  const len = lineChartData[0].pointData.length;
+  //       { x: new Date("2020-02-01T00:00:00"), y: 50 },
+  //       { x: new Date("2020-03-01T00:00:00"), y: 55 },
+  //       { x: new Date("2020-04-01T00:00:00"), y: 75 },
+  //       { x: new Date("2020-05-01T00:00:00"), y: 30 },
+  //       { x: new Date("2020-06-01T00:00:00"), y: 45 },
+  //       { x: new Date("2020-07-01T00:00:00"), y: 55 },
+  //       { x: new Date("2020-08-01T00:00:00"), y: 15 },
+  //       { x: new Date("2020-09-01T00:00:00"), y: 10 },
+  //       { x: new Date("2020-10-01T00:00:00"), y: 20 },
+  //       { x: new Date("2020-11-01T00:00:00"), y: 40 },
+  //       { x: new Date("2020-12-01T00:00:00"), y: 65 },
+  //       { x: new Date("2020-12-31T00:00:00"), y: 70 },
+  //     ],
+  //   },
+  // ];
+  // const len = lineChartData[0].pointData.length;
 
   //fake data for table
   const headers = ["Label", "Value", "% from Total", "% Change"];
@@ -77,9 +92,9 @@ const DashBoard = () => {
       <LevelOneContainer>
         <TitleCard
           title="Year Total"
-          value={lineChartData[0].pointData[len - 1].y}
+          value={'49,836'}
         />
-        <LineChart id="lineChart1" data={lineChartData} />
+        <LineChart id="lineChart1" data={newLineData} />
       </LevelOneContainer>
       <LevelOneContainer className={classes.levelOneBlank}>
         <QuadRowCard>

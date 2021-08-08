@@ -154,9 +154,9 @@ export const buildLineChart = (id, data, options = null, transition = true) => {
   //for setting selective pointer marker//
   const points = [];
   data[0].pointData.forEach((e) => {
-    let x, y;
+    let x, y
     x = xScale(e.x);
-    y = yScale(e.y);
+    y = yScale(yMin);//yScale(e.y);
     points.push([x, y]);
   });
 
@@ -166,7 +166,7 @@ export const buildLineChart = (id, data, options = null, transition = true) => {
   const setPointMarker = (index) => {
     const pointMarker = svg.select(`#${id}_pointMarker`);
     const x = points[index][0];
-    const y = points[index][1];
+    const y = yScale(data[0].pointData[index].y)
     if (pointMarker.empty()) {
       const pointGroup = svg
         .append("g")
@@ -199,16 +199,17 @@ export const buildLineChart = (id, data, options = null, transition = true) => {
   //for tool tip
   const setToolTip = (index) => {
     const x = points[index][0];
-    const y = points[index][1];
+    const y = yScale(data[0].pointData[index].y)
     const tooltipDim = tooltip.node().getBoundingClientRect()
     const svgDim = getCoords(svg.node())
     //to translate div tooltip to svg coords
     //without pageoffset the tooltip height goes crazy
+    const value = d3.format(',')(data[0].pointData[index].y.toFixed(3))
     tooltip
       .style('opacity', 1)
       .style(`left`, `${svgDim.left + x - tooltipDim.width/2}px`)
       .style('top', `${svgDim.top + y - tooltipDim.height - 7 - 14}px`)//...-arrow height(css) - extra offset
-    d3.select(`#${id}_tooltip_top`).html(data[0].pointData[index].y)
+    d3.select(`#${id}_tooltip_top`).html(value)
     d3.select(`#${id}_tooltip_bottom`).html(d3.timeFormat("Numbers for %m/%d/%y")(data[0].pointData[index].x))
   };
   //for highlighting current month label
@@ -254,7 +255,8 @@ export const buildLineChart = (id, data, options = null, transition = true) => {
   };
   svg.on("mousemove", (ev) => {
     const mouse = d3.pointer(ev);
-    const index = delanauy.find(mouse[0], mouse[1]);
+    
+    const index = delanauy.find(mouse[0], yScale(yMin));
     //only on index change - bug where on first run index is wrong
     setPointMarker(index);
     setToolTip(index);
@@ -276,7 +278,40 @@ export const buildLineChart = (id, data, options = null, transition = true) => {
     lastLabel = null;
     tooltip
       .style('opacity', 0)
+    d3.select(`#${id}_YAxisHighlight`).remove();
   });
+
+  //mobile event listeners
+  svg
+  .on("touchmove", (ev) => {
+    ev.preventDefault()
+    const mouse = d3.pointers(ev)[0]//for some reason d3.pointer doesn't work for touchmove
+    const index = delanauy.find(mouse[0], yScale(yMin));
+    //only on index change - bug where on first run index is wrong
+    setPointMarker(index);
+    setToolTip(index);
+    highlightMonth(index);
+    highlightYAxis(index);
+
+  })
+  .on("touchend", () => {
+    const pointMarker = svg.select(`#${id}_pointMarker`);
+    if (!pointMarker.empty()) {
+      pointMarker.remove();
+    }
+    if (lastLabel !== null) {
+      lastLabel
+        .transition()
+        .duration(500)
+        .ease(d3.easeQuadIn)
+        .style("fill", theme.second);
+    }
+    lastLabel = null;
+    tooltip
+      .style('opacity', 0)
+    d3.select(`#${id}_YAxisHighlight`).remove();
+  })
+
 
   const thisChart = {
     //properties
