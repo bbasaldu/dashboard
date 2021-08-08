@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import classes from './DropDownMenu.module.css'
-const event = new Event('SelectionChange');
+const dataChangeEvent = new Event('dataChange')
 const DropDownMenu = (props) => {
     const btnRef = useRef()
     const allOptions = props.options
@@ -9,7 +9,7 @@ const DropDownMenu = (props) => {
     const [showOptions, setShowOptions] = useState(false)
     useEffect(() => {
         setOptions(allOptions.filter(d => d!== currOption))
-        btnRef.current.dispatchEvent(event);
+        btnRef.current.dispatchEvent(dataChangeEvent);
     }, [currOption, allOptions])
     const handleClick = () => {
         setShowOptions(last => !last)

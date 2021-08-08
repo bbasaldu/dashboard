@@ -30,7 +30,11 @@ export const buildBarChart = (
   transition = true,
   onDataChange
 ) => {
+  //dont need a remove function if we just being with removal of everything on each call
   const { theme, selectionOptions } = options;
+  const container = d3.select(`#${id}`);
+  container.selectAll('svg').remove()
+  d3.select(`#${id}_tooltip`).remove()
   //tooltip - for some reason css top, left dont affect it so i have to set it here
   //could increase performance(is it negligable?) by creating tooltip in react component and having it persist
   const tooltip = d3
@@ -42,7 +46,6 @@ export const buildBarChart = (
     .style("top", "0px")
     .style("left", "0px");
 
-  const container = d3.select(`#${id}`);
 
   const w = parseFloat(container.style("width"));
   const h = parseFloat(container.style("height"));
@@ -80,7 +83,7 @@ export const buildBarChart = (
     .call(d3.axisBottom(xScale));
 
   const yScale = d3.scaleLinear().domain([0, yMax]).range([height, margin.top]);
-  const yAxis = svg
+  svg
     .append("g")
     .attr("class", classes.yAxis)
     .attr("id", `${id}_yAxis`)
@@ -199,7 +202,7 @@ export const buildBarChart = (
 
   //listen for custom dropdown menu to change selection
   //change data
-  d3.select(`#${id}_dropdown`).on("SelectionChange", (ev) => {
+  d3.select(`#${id}_dropdown`).on("dataChange", (ev) => {
     const newData = evalFilter(ev.target.innerHTML, data, selectionOptions);
     changeData(newData);
     onDataChange(newData);

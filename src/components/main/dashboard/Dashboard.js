@@ -1,12 +1,11 @@
 import classes from "./Dashboard.module.css";
 import LevelOneContainer from "./LevelOneContainer";
 import TitleCard from "./TitleCard";
-import VerticalSplitContainer from "./VerticalSplitContainer";
 import Headers from "./VisualizationTemplates/Headers";
-import LegendColor from "./VisualizationTemplates/LegendColor";
 import LineChart from "./VisualizationTemplates/LineChart";
 import PercentChange from "./VisualizationTemplates/PercentChange";
-import PieChart from "./VisualizationTemplates/PieChart";
+import PieChart from './VisualizationTemplates/newCharts/PieChart/PieChart'
+import BarChartV2 from "./VisualizationTemplates/BarChartV2";
 import QuadRowCard from "./VisualizationTemplates/QuadRowCard";
 import Row from "./VisualizationTemplates/Row";
 import StatCard from "./VisualizationTemplates/StatCard";
@@ -16,7 +15,6 @@ import bookIcon from "../../../assets/fi-rr-book.svg";
 import timeIcon from "../../../assets/fi-rr-clock.svg";
 import usersIcon from "../../../assets/fi-rr-users.svg";
 import screenIcon from "../../../assets/fi-rr-screen.svg";
-import BarChart from "./VisualizationTemplates/BarChart";
 
 const DashBoard = () => {
   //fake data for line chart
@@ -53,7 +51,7 @@ const DashBoard = () => {
   const row4 = ["Label4", "114,000", "10%"];
 
   //fake data for pie chart and table legend
-  const pieChartHeaders = ["Legend", "Label", "Value"];
+
   const pieChartData = {
     total: 100,
     pieData: [
@@ -62,10 +60,6 @@ const DashBoard = () => {
       { label: "label3", value: 25 },
       { label: "label4", value: 25 },
     ],
-  };
-  const pieColors = ["#2cd9d0", "#5eacc9", "#e4970f", "#cc3035"];
-  const color = (color) => {
-    return <LegendColor color={color} />;
   };
   //fake data for simple bar chart
   const barChartData = [
@@ -77,6 +71,7 @@ const DashBoard = () => {
     {label: 'F', value: 4},
     {label: 'G', value: 16},
 ]
+
   return (
     <div className={classes.container}>
       <LevelOneContainer>
@@ -89,7 +84,8 @@ const DashBoard = () => {
       <LevelOneContainer className={classes.levelOneBlank}>
         <QuadRowCard>
           <StatCard
-            value="43.4%"
+            lastValue="43.19"
+            value="43.40%"
             percentValue={`${12}%`}
             positive={true}
             icon={screenIcon}
@@ -97,7 +93,8 @@ const DashBoard = () => {
             Rate of Something
           </StatCard>
           <StatCard
-            value="4.2"
+            lastValue="4.20"
+            value="4.90"
             percentValue={`${1.2}%`}
             positive={true}
             icon={bookIcon}
@@ -107,6 +104,7 @@ const DashBoard = () => {
         </QuadRowCard>
         <QuadRowCard>
           <StatCard
+            lastValue="200"
             value="320K"
             percentValue={`${2.1}%`}
             positive={false}
@@ -124,18 +122,9 @@ const DashBoard = () => {
           </StatCard>
         </QuadRowCard>
       </LevelOneContainer>
-      <LevelOneContainer className={classes.levelOneGrowVertical}>
+      <LevelOneContainer>
         <TitleCard title="Totals" />
-        <VerticalSplitContainer>
-          <Table className={classes.flexGrow}>
-            <Headers headers={pieChartHeaders} />
-            <Row data={[color(pieColors[0]), "label1", 25]}></Row>
-            <Row data={[color(pieColors[1]), "label2", 25]}></Row>
-            <Row data={[color(pieColors[2]), "label3", 25]}></Row>
-            <Row data={[color(pieColors[3]), "label4", 25]}></Row>
-          </Table>
-          <PieChart id="pieChart1" data={pieChartData} />
-        </VerticalSplitContainer>
+        <PieChart id="pieChart1" data={pieChartData} />
       </LevelOneContainer>
       <LevelOneContainer className={classes.levelOneGrowVertical}>
         <TitleCard title="Table Label" />
@@ -161,12 +150,13 @@ const DashBoard = () => {
           title="Max Value"
           value={20}
         />
-        <BarChart id="barChart1" data={barChartData}/>
+        <BarChartV2 id="barChart1" data={barChartData}/>
       </LevelOneContainer>
       <LevelOneContainer className={classes.levelOneBlank}>
         <QuadRowCard>
           <StatCard
-            value="43.4%"
+            lastValue="43.19"
+            value="43.40%"
             percentValue={`${12}%`}
             positive={true}
             icon={screenIcon}
@@ -174,7 +164,8 @@ const DashBoard = () => {
             Rate of Something
           </StatCard>
           <StatCard
-            value="4.2"
+            lastValue="4.20"
+            value="4.90"
             percentValue={`${1.2}%`}
             positive={true}
             icon={bookIcon}
@@ -184,6 +175,7 @@ const DashBoard = () => {
         </QuadRowCard>
         <QuadRowCard>
           <StatCard
+            lastValue="200"
             value="320K"
             percentValue={`${2.1}%`}
             positive={false}
@@ -201,18 +193,9 @@ const DashBoard = () => {
           </StatCard>
         </QuadRowCard>
       </LevelOneContainer>
-      <LevelOneContainer className={classes.levelOneGrowVertical}>
+      <LevelOneContainer>
         <TitleCard title="Totals" />
-        <VerticalSplitContainer>
-          <Table className={classes.flexGrow}>
-            <Headers headers={pieChartHeaders} />
-            <Row data={[color(pieColors[0]), "label1", 25]}></Row>
-            <Row data={[color(pieColors[1]), "label2", 25]}></Row>
-            <Row data={[color(pieColors[2]), "label3", 25]}></Row>
-            <Row data={[color(pieColors[3]), "label4", 25]}></Row>
-          </Table>
-          <PieChart id="pieChart2" data={pieChartData} />
-        </VerticalSplitContainer>
+        <PieChart id="pieChart2" data={pieChartData} />
       </LevelOneContainer>
       <LevelOneContainer className={classes.levelOneGrowVertical}>
         <TitleCard title="Table Label" />

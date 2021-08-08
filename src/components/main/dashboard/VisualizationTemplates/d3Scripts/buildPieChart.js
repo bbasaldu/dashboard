@@ -53,11 +53,12 @@ export const buildPieChart = (id, data, options = null, transition = true) => {
 
 
 
-  //console.log(arcs)
+
   arcs.forEach((arc) => {
     arc.startAngle *= 0.95;
     arc.endAngle *= 1.05;
   });
+  //resize bug for sure has to do with tweenpie giving different values than non transition
   if(transition){
     animatePieArcs(arcs)
   }
@@ -66,9 +67,11 @@ export const buildPieChart = (id, data, options = null, transition = true) => {
     .data(arcs)
     .enter()
     .append('path')
+    .attr("transform", "rotate(0)")
     .attr('id', (d,i) => `arc_${i}`)
     .attr('fill', (d,i) => colors[i])
     .attr('d', arc)
+    g.select("#arc_0").raise();
   }
   
 
