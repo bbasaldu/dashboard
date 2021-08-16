@@ -86,7 +86,7 @@ const PieChart = (props) => {
     if (isVisible) {
       calculateVariables();
     }
-  }, [pieData, isVisible]);
+  }, [isVisible]);
 
   //animate
   useEffect(() => {
@@ -108,7 +108,7 @@ const PieChart = (props) => {
 
       <div className={classes.container} ref={containerRef}>
         {dim !== null && (
-          <svg className={classes.svg} id={"svgPrac"}>
+          <svg className={classes.svg} id={`${props.id}_svg`}>
             <g
               transform={`translate(${dim.w / 2},${dim.h / 2})`}
               ref={arcsGroupRef}

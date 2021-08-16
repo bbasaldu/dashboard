@@ -1,7 +1,8 @@
 .container{
     width: 30%;
-    height: auto;
-    margin-bottom: 1%;
+    height: min-content;
+    margin: 0px;
+    /* margin-bottom: 1%; */
     margin-left: 2.5%;
 }
 .container *{
@@ -56,12 +57,21 @@
 .options li{
     margin: 0;
     padding: 0;
-    text-align: center;
-    user-select: none;
-    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    
     
     
 
+}
+.options label{
+    cursor: pointer;
+    display: inline-flex;
+    flex-grow: 1;
+    
+}
+.options input{
+    cursor: pointer;
 }
 .options li:hover{
     background-color: #e0e0e0;

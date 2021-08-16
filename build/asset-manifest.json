@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.css": "/dashboard/static/css/main.29c3437b.chunk.css",
-    "main.js": "/dashboard/static/js/main.c024f6ba.chunk.js",
-    "runtime-main.js": "/dashboard/static/js/runtime-main.6b2bae37.js",
-    "static/js/2.904265b3.chunk.js": "/dashboard/static/js/2.904265b3.chunk.js",
-    "static/js/3.62f1b812.chunk.js": "/dashboard/static/js/3.62f1b812.chunk.js",
+    "main.css": "/dashboard/static/css/main.4d2e929f.chunk.css",
+    "main.js": "/dashboard/static/js/main.0385ee32.chunk.js",
+    "runtime-main.js": "/dashboard/static/js/runtime-main.9cd5daf8.js",
+    "static/js/2.18d149f3.chunk.js": "/dashboard/static/js/2.18d149f3.chunk.js",
+    "static/js/3.e69f93e8.chunk.js": "/dashboard/static/js/3.e69f93e8.chunk.js",
     "index.html": "/dashboard/index.html",
-    "static/js/2.904265b3.chunk.js.LICENSE.txt": "/dashboard/static/js/2.904265b3.chunk.js.LICENSE.txt",
+    "static/js/2.18d149f3.chunk.js.LICENSE.txt": "/dashboard/static/js/2.18d149f3.chunk.js.LICENSE.txt",
     "static/media/fi-rr-book.f8977565.svg": "/dashboard/static/media/fi-rr-book.f8977565.svg",
     "static/media/fi-rr-clock.04fbd2c6.svg": "/dashboard/static/media/fi-rr-clock.04fbd2c6.svg",
     "static/media/fi-rr-interrogation.da36bdf3.svg": "/dashboard/static/media/fi-rr-interrogation.da36bdf3.svg",
@@ -14,9 +14,9 @@
     "static/media/fi-rr-users.7a091b6e.svg": "/dashboard/static/media/fi-rr-users.7a091b6e.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.6b2bae37.js",
-    "static/js/2.904265b3.chunk.js",
-    "static/css/main.29c3437b.chunk.css",
-    "static/js/main.c024f6ba.chunk.js"
+    "static/js/runtime-main.9cd5daf8.js",
+    "static/js/2.18d149f3.chunk.js",
+    "static/css/main.4d2e929f.chunk.css",
+    "static/js/main.0385ee32.chunk.js"
   ]
 }

@@ -11,7 +11,7 @@
     opacity: 0;
 }
 .grid line{
-    stroke-width: 0.05em;
+    stroke-width: 0.5px;
 }
 .grid path{
     stroke: none;

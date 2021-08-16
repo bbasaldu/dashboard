@@ -13,3 +13,10 @@ export const isScrolledIntoView = (el) => {
     const isVisible = (threshold <= window.innerHeight);
     return isVisible;
 }
+export const getElemBBox = (svg, text) => {
+    const temp = svg.append("text").text(text);
+  
+    const dim = temp.node().getBoundingClientRect();
+    temp.remove();
+    return dim;
+  };

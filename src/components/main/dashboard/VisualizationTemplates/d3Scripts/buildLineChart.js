@@ -295,9 +295,15 @@ export const buildLineChart = (id, data, options = null, transition = true) => {
     ev.preventDefault()
     const mouse = d3.pointers(ev)[0]//for some reason d3.pointer doesn't work for touchmove
     const index = delanauy.find(mouse[0], yScale(yMin));
+    setPointMarker(index);
     setToolTip(index);
-    tooltip
-      .style('opacity', 0)
+    highlightMonth(index);
+    highlightYAxis(index);
+    //have to render twice due to bug where pos on first render is totally off
+    setPointMarker(index);
+    setToolTip(index);
+    highlightMonth(index);
+    highlightYAxis(index);
     
     //navigator.vibrate(200) not on ios...
   })

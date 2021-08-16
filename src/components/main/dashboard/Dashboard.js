@@ -15,6 +15,8 @@ import bookIcon from "../../../assets/fi-rr-book.svg";
 import timeIcon from "../../../assets/fi-rr-clock.svg";
 import usersIcon from "../../../assets/fi-rr-users.svg";
 import screenIcon from "../../../assets/fi-rr-screen.svg";
+import MultiLineChart from "./VisualizationTemplates/MultiLineChart";
+//import MultiLineChart from "./VisualizationTemplates/newCharts/MultiLineChart/MultiLineChart";
 const DashBoard = () => {
   //fake data for line chart
   const newLineData = [{label: 'line2', pointData: []}]
@@ -209,8 +211,12 @@ const DashBoard = () => {
         </QuadRowCard>
       </LevelOneContainer>
       <LevelOneContainer>
-        <TitleCard title="Totals" />
-        <PieChart id="pieChart2" data={pieChartData} />
+      <TitleCard
+          className={classes.dropDownSpace}
+          title="Year Total"
+          value={'49,836'}
+        />
+        <MultiLineChart id="multiLineChart1"/>
       </LevelOneContainer>
       <LevelOneContainer className={classes.levelOneGrowVertical}>
         <TitleCard title="Table Label" />

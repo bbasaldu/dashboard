@@ -29,6 +29,11 @@
     background-color: #f9fafb !important;
 }
 
+.dropDownSpace {
+    height: min-content !important;
+    padding-bottom: 0px !important;
+}
+
 
 
 
