@@ -2,8 +2,9 @@
     width: 30%;
     height: min-content;
     margin: 0px;
-    /* margin-bottom: 1%; */
+    margin-bottom: 20px;
     margin-left: 2.5%;
+    flex-shrink: 1;
 }
 .container *{
     font-family: Helvetica;

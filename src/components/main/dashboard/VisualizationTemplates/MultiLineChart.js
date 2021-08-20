@@ -80,13 +80,13 @@ const MultiLineChart = (props) => {
   const [data, setData] = useState(lineData);
   const [isVisible, setIsVisible] = useState(false);
   const resized = useSelector((state) => state.resizeState.resized);
-  const [bool, setBool] = useState(true);
   const calculateVariables = useCallback(
     (animate) => {
       const container = d3.select(containerRef.current);
       const svg = container.select("svg");
-      const w = parseFloat(container.style("width"));
-      const h = parseFloat(container.style("height"));
+      let w = parseFloat(container.style("width"));
+      let h = parseFloat(container.style("height"));
+      
       const xTickDim = getElemBBox(svg, months[0] + "");
       const yMin = d3.min(data, (line) => d3.min(line.pointData, (d) => d.y));
       const yMax = d3.max(data, (line) => d3.max(line.pointData, (d) => d.y));

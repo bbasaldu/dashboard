@@ -32,7 +32,6 @@ export const buildMultiLineChart = (vars, data) => {
     line,
     animate,
   } = vars;
-  //d3.select(`#${id}_tooltipGroup`).remove()
   const tooltipTop = d3.select(`#${id}_tooltipTop`)
   if(tooltipTop.empty()){
     d3.select('body')
@@ -46,7 +45,6 @@ export const buildMultiLineChart = (vars, data) => {
   }
   const svg = d3.select(`#${id}_svg`);
   svg.selectAll("*").remove();
-  svg.attr("width", w).attr("height", h);
   let xAxis = svg
     .append("g")
     .attr("class", classes.xAxis)

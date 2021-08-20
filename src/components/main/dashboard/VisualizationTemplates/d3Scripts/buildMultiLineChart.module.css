@@ -58,23 +58,3 @@
   padding: 0;
   
 }
-/* .tooltip::before {
-  content: " ";
-  position: absolute;
-  display: block;
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  pointer-events: none;
-  border-top: 7px solid #051c1b;
-  left: calc(50% - 7px);
-  top: calc(100%);
-}
-.tooltipTop {
-  color: white;
-  margin-bottom: 5px;
-  font-size: clamp(10px, 2vw, 16px);
-}
-.tooltipBottom {
-  color: #c0c0c0;
-  font-size: clamp(8px, 1vw, 14px);
-} */
