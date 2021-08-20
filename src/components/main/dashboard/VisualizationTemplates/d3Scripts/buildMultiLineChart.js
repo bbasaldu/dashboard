@@ -38,10 +38,13 @@ export const buildMultiLineChart = (vars, data) => {
     .append("div")
       .attr("class", classes.tooltipTop)
       .attr("id", `${id}_tooltipTop`)
-      .style('opacity', 0)
+      .style('display', 'none')
       .style("top", "0px")
       .style("left", "0px")
       .html('00/00/00')
+  }
+  else{
+
   }
   const svg = d3.select(`#${id}_svg`);
   svg.selectAll("*").remove();
@@ -89,9 +92,11 @@ export const changeData = (vars, data) => {
   const svg = d3.select(`#${id}_svg`);
   const svgDim = getCoords(svg.node());
   const radius = 4;
-  const tooltipTop = d3.select(`#${id}_tooltipTop`);
-  const tooltipDim = tooltipTop.node().getBoundingClientRect();
+  
   const setToolTips = (index) => {
+    const tooltipTop = d3.select(`#${id}_tooltipTop`);
+    const tooltipDim = tooltipTop.node().getBoundingClientRect();
+
     const x = points[index][0];
     const date = d3.timeFormat("%m/%d/%y")(data[0].pointData[index].x)
     tooltipTop
@@ -115,11 +120,11 @@ export const changeData = (vars, data) => {
     data.forEach((d, i) => {
       const tooltip = d3.select(`#${id}_tooltip_${i}`);
       if(!d.showing){
-        tooltip.style('opacity', 0)
+        tooltip.style('display', 'none')
         return; //asks as continue since forEach is weird
       }
       else{
-        tooltip.style('opacity', 'unset')
+        tooltip.style('display', 'initial')
       }
       const y = yScale(d.pointData[index].y);
       const value = d3.format(",")(d.pointData[index].y.toFixed(3));
@@ -130,7 +135,7 @@ export const changeData = (vars, data) => {
       else {
         offset = offset * 50 + 6;
       }
-      const tooltipDim = tooltipTop.node().getBoundingClientRect();
+      //const tooltipDim = tooltipTop.node().getBoundingClientRect();
       
       if(tooltipDim.right >= svgDim.right){
         const thisDim = tooltip.node().getBoundingClientRect()
@@ -209,8 +214,8 @@ export const changeData = (vars, data) => {
     //only on index change - bug where on first run index is wrong
     highlightYAxis(index);
     setPointMarkers(index);
-    d3.select(`#${id}_tooltipTop`).style('opacity', 1)
-    d3.selectAll(`.${classes.tooltip}`).style('opacity', 1)
+    d3.select(`#${id}_tooltipTop`).style('display', 'unset')
+    d3.selectAll(`.${classes.tooltip}`).style('display', 'initial')
     setToolTips(index);
   });
 
@@ -220,8 +225,8 @@ export const changeData = (vars, data) => {
       pointMarkerGroup.remove();
     }
     d3.select(`#${id}_YAxisHighlight`).remove();
-    d3.select(`#${id}_tooltipTop`).style('opacity', 0)
-    d3.selectAll(`.${classes.tooltip}`).style('opacity', 0)
+    d3.select(`#${id}_tooltipTop`).style('display', 'none')
+    d3.selectAll(`.${classes.tooltip}`).style('display', 'none')
   });
   svg
   .on('touchstart', (ev) => {
@@ -245,8 +250,8 @@ export const changeData = (vars, data) => {
     const index = delanauy.find(mouse[0], yScale(yMin));
     //only on index change - bug where on first run index is wrong
     setPointMarkers(index);
-    d3.select(`#${id}_tooltipTop`).style('opacity', 1)
-    d3.selectAll(`.${classes.tooltip}`).style('opacity', 1)
+    d3.select(`#${id}_tooltipTop`).style('display', 'initial')
+    d3.selectAll(`.${classes.tooltip}`).style('display', 'initial')
     setToolTips(index);
     highlightYAxis(index);
 
@@ -257,8 +262,8 @@ export const changeData = (vars, data) => {
       pointMarkerGroup.remove();
     }
     d3.select(`#${id}_YAxisHighlight`).remove();
-    d3.select(`#${id}_tooltipTop`).style('opacity', 0)
-    d3.selectAll(`.${classes.tooltip}`).style('opacity', 0)
+    d3.select(`#${id}_tooltipTop`).style('display', 'none')
+    d3.selectAll(`.${classes.tooltip}`).style('display', 'none')
   })
 
   //handling data changes
@@ -288,7 +293,7 @@ export const changeData = (vars, data) => {
         .append("div")
         .attr("class", classes.tooltip)
         .attr("id", `${id}_tooltip_${i}`)
-        .style('opacity', 0)
+        .style('visible', 'none')
         .style("top", "0px")
         .style("left", "0px");
       }
@@ -339,9 +344,7 @@ export const changeData = (vars, data) => {
     .data(data, (d) => d.label)
     .join(
       (enter) => handleEnter(enter),
-      (update) => {
-        handleUpdate(update);
-      },
+      (update) => handleUpdate(update),
       (exit) => handleExit(exit) //dont need for now as im keeping the paths and just updating its offset
     );
 };
