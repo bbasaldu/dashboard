@@ -9,7 +9,7 @@ import {
   buildMultiLineChart,
   changeData,
   rangeChange,
-} from "./d3Scripts/buildMultiLineChart";
+} from "./d3Scripts/buildMultiLineChartV2";
 import { useSelector } from "react-redux";
 import { Fragment } from "react";
 import LineDropDownMenu from "../../../general/LineDropDownMenu";
@@ -77,29 +77,40 @@ const theme = {
   second: "#C0C0C0",
   third: "#2cd9d0",
 };
-const MultiLineChart = (props) => {
+const MultiLineChartV3 = (props) => {
   const containerRef = useRef();
   const [data, setData] = useState(lineData);
   const [isVisible, setIsVisible] = useState(false);
-  // const [range, setRange] = useState([
-  //   new Date("2020-01-01T00:00:00"),
-  //   new Date("2020-12-30T00:00:00"),
-  // ]);
+  const [range, setRange] = useState([
+    new Date("2020-01-01T00:00:00"),
+    new Date("2020-12-30T00:00:00"),
+  ]);
+  const dataRef = useRef();
+  const rangeRef = useRef();
 
   const resized = useSelector((state) => state.resizeState.resized);
   const calculateVariables = useCallback(
-    (
-      animate,
-      range = [new Date("2020-01-01T00:00:00"), new Date("2020-12-30T00:00:00")]
-    ) => {
+    (animate, data, range) => {
       const container = d3.select(containerRef.current);
       const svg = container.select("svg");
       let w = parseFloat(container.style("width"));
       let h = parseFloat(container.style("height"));
 
       const xTickDim = getElemBBox(svg, months[0] + "");
-      const yMin = d3.min(data, (line) => d3.min(line.pointData, (d) => d.y));
-      const yMax = d3.max(data, (line) => d3.max(line.pointData, (d) => d.y));
+      const yMin = d3.min(data, (line) =>
+        d3.min(line.pointData, (d) => {
+          if (d.x >= range[0] && d.x <= range[1]) {
+            return d.y;
+          }
+        })
+      );
+      const yMax = d3.max(data, (line) =>
+        d3.max(line.pointData, (d) => {
+          if (d.x >= range[0] && d.x <= range[1]) {
+            return d.y;
+          }
+        })
+      );
       const yTickArray = d3.ticks(0, yMax, 10);
       const yTickDim = getElemBBox(svg, yTickArray[yTickArray.length - 1] + "");
       const margin = {
@@ -113,8 +124,7 @@ const MultiLineChart = (props) => {
       const xScale = d3
         .scaleTime()
         .domain(range) //Need ISO 8601 format
-        .range([margin.left, width])
-        //.nice();
+        .range([margin.left, width]);
       const yScale = d3
         .scaleLinear()
         .domain([yMin, yMax])
@@ -143,29 +153,31 @@ const MultiLineChart = (props) => {
         yScale,
         line,
         animate,
-        range
+        range,
       };
       return localVars;
     },
-    [props.id, data]
+    [props.id]
   );
 
   //on resize
   useEffect(() => {
     if (resized && !isVisible) {
-      const vars = calculateVariables(false);
-      buildMultiLineChart(vars, data);
+      const vars = calculateVariables(false, dataRef.current, rangeRef.current);
+      buildMultiLineChart(vars, dataRef.current);
     } else if (resized && isVisible) {
-      const vars = calculateVariables(false);
-      buildMultiLineChart(vars, data);
-      changeData(vars, data);
+      const vars = calculateVariables(false, dataRef.current, rangeRef.current);
+      buildMultiLineChart(vars, dataRef.current);
+      changeData(vars, dataRef.current);
     }
-  }, [resized, calculateVariables, data, isVisible]);
+  }, [resized, calculateVariables, isVisible]);
 
   //initial
   useEffect(() => {
     if (!isVisible) {
-      const vars = calculateVariables(true);
+      dataRef.current = data;
+      rangeRef.current = range;
+      const vars = calculateVariables(true, data, range);
       buildMultiLineChart(vars, lineData);
       const onVisibleChange = () => {
         if (isScrolledIntoView(containerRef.current)) {
@@ -176,25 +188,32 @@ const MultiLineChart = (props) => {
       window.addEventListener("scroll", onVisibleChange);
       onVisibleChange();
     }
-  }, [calculateVariables, isVisible]);
+  }, [calculateVariables, isVisible, data, range]);
 
   //on data change
   useEffect(() => {
     if (isVisible) {
-      const vars = calculateVariables(true);
-      changeData(vars, data);
+      dataRef.current = data;
+      const vars = calculateVariables(true, dataRef.current, rangeRef.current);
+      changeData(vars, dataRef.current);
     }
   }, [data, calculateVariables, isVisible]);
 
+  //on range change
+  useEffect(() => {
+    if (isVisible) {
+      rangeRef.current = range;
+      const vars = calculateVariables(true, dataRef.current, rangeRef.current);
+      rangeChange(vars, dataRef.current);
+    }
+  }, [range, calculateVariables, isVisible]);
+
   const handleDataChange = (newData) => {
-    //setRange([new Date("2020-08-01T00:00:00"),new Date("2020-12-30T00:00:00")])
     setData(newData);
   };
   const handleRangeChange = (range) => {
-    //const newRange = [new Date("2020-11-01T00:00:00"),new Date("2020-12-30T00:00:00")]
-    const vars = calculateVariables(true, range)
-    rangeChange(vars, data)
-  }
+    setRange(range);
+  };
   return (
     <Fragment>
       <div className={classes.filters}>
@@ -212,4 +231,4 @@ const MultiLineChart = (props) => {
     </Fragment>
   );
 };
-export default MultiLineChart;
+export default MultiLineChartV3;

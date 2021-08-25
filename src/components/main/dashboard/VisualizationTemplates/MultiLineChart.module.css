@@ -9,3 +9,11 @@
     flex-grow: 1;
     /* fills container */
 }
+.filters {
+    height: 30px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: space-between; */
+}

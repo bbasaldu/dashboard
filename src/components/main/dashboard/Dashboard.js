@@ -16,6 +16,8 @@ import timeIcon from "../../../assets/fi-rr-clock.svg";
 import usersIcon from "../../../assets/fi-rr-users.svg";
 import screenIcon from "../../../assets/fi-rr-screen.svg";
 import MultiLineChart from "./VisualizationTemplates/MultiLineChart";
+import MultiLineChartV2 from "./VisualizationTemplates/MultiLineChartV2";
+import MultiLineChartV3 from "./VisualizationTemplates/MultiLineChartV3";
 //import MultiLineChart from "./VisualizationTemplates/newCharts/MultiLineChart/MultiLineChart";
 const DashBoard = () => {
   //fake data for line chart
@@ -216,7 +218,9 @@ const DashBoard = () => {
           title="Year Total"
           value={'49,836'}
         />
-        <MultiLineChart id="multiLineChart1"/>
+        {/* <MultiLineChart id="multiLineChart1"/> */}
+        
+        <MultiLineChartV3 id="multiV2"/>
       </LevelOneContainer>
       <LevelOneContainer className={classes.levelOneGrowVertical}>
         <TitleCard title="Table Label" />
