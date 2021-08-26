@@ -1,48 +1,90 @@
-import { useRef } from 'react';
-import classes from './DateFilter.module.css'
+import { useRef, useState } from "react";
+import classes from "./DateFilter.module.css";
 const DateFilter = (props) => {
-    const {data} = props;
-    const fromRef = useRef()
-    const toRef = useRef()
-    // new Date("2020-01-01T00:00:00"),
-    // new Date("2020-12-30T00:00:00"),
-    const {onRangeChange} = props;
-    const handleRangeChange = () => {
-        // const firstElem = data[0]
-        const fromArr = fromRef.current.value.split('/')
-        console.log(fromArr)
-        const from = new Date(`2020-${fromArr[0]}-${fromArr[1]}T00:00:00`)
-        const toArr = toRef.current.value.split('/')
-        const to = new Date(`2020-${toArr[0]}-${toArr[1]}T00:00:00`)
-        // const t2 = new Date("2020-12-30T00:00:00")
-        // const fromIndex = firstElem.pointData.findIndex(d => d.x.toString() === t.toString())
-        // console.log(fromIndex)
-        
-        // const toIndex = firstElem.pointData.findIndex(d => d.x.toString() === t2.toString())
-        // console.log(toIndex)
-        // const newData = Array.from(data)
-        // newData.forEach(d => {
-        //     d.pointData = d.pointData.slice(fromIndex, toIndex)
-        // })
-        // console.log(newData)
-        // const to = toRef.current.value.split('/')
-        //const newData = data.filter()
-        
-        onRangeChange([from, to])
-        //console.log(t.toString() === t2.toString())
+  const fromRef = useRef();
+  const toRef = useRef();
+  const [validRange, setValidRange] = useState([true, true]);
+
+  const { onRangeChange } = props;
+  const handleRangeChange = () => {
+    const fromArr = fromRef.current.value.split("/");
+    const from = new Date(`2020-${fromArr[0]}-${fromArr[1]}T00:00:00`);
+    const toArr = toRef.current.value.split("/");
+    const to = new Date(`2020-${toArr[0]}-${toArr[1]}T00:00:00`);
+    const fromStringArray = fromRef.current.value.split("");
+    const toStringArray = toRef.current.value.split("");
+    let fromValid;
+    if (
+      !isNaN(fromStringArray[0]) &&
+      !isNaN(fromStringArray[1]) &&
+      fromStringArray[2] === "/" &&
+      !isNaN(fromStringArray[3]) &&
+      !isNaN(fromStringArray[4])
+    ) {
+      fromValid = true;
+      if (from.toString() === "Invalid Date") {
+        fromValid = false;
+      }
+    } else {
+      fromValid = false;
     }
-    return (
-        <div className={classes.container}>
-            <div>
-                <span>From: </span>
-                <input type="text" placeholder="mm/dd" ref={fromRef} defaultValue="01/01"/>
-            </div>
-            <div>
-                <span>To: </span>
-                <input type="text" placeholder="mm/dd" ref={toRef} defaultValue="12/30"/>
-            </div>
-            <button className={classes.btn} type="button" onClick={handleRangeChange}>Set Range</button>
-        </div>
-    )
-}
-export default DateFilter
+
+    let toValid;
+    if (
+      !isNaN(toStringArray[0]) &&
+      !isNaN(toStringArray[1]) &&
+      toStringArray[2] === "/" &&
+      !isNaN(toStringArray[3]) &&
+      !isNaN(toStringArray[4])
+    ) {
+      toValid = true;
+      if (to.toString() === "Invalid Date") {
+        toValid = false;
+      }
+    } else {
+      toValid = false;
+    }
+    if (from > to) {
+      fromValid = false;
+      toValid = false;
+    }
+    setValidRange([fromValid, toValid]);
+
+    if (fromValid && toValid && from < to) {
+      onRangeChange([from, to]);
+    }
+  };
+
+  return (
+    <div className={classes.container}>
+      <div>
+        <span>From: </span>
+        <input
+          type="text"
+          placeholder="mm/dd"
+          ref={fromRef}
+          defaultValue="01/01"
+          style={{
+            backgroundColor: validRange[0] === false ? "#FFC1CC" : "initial",
+          }}
+        />
+      </div>
+      <div>
+        <span>To: </span>
+        <input
+          type="text"
+          placeholder="mm/dd"
+          ref={toRef}
+          defaultValue="12/30"
+          style={{
+            backgroundColor: validRange[1] === false ? "#FFC1CC" : "initial",
+          }}
+        />
+      </div>
+      <button className={classes.btn} type="button" onClick={handleRangeChange}>
+        Set Range
+      </button>
+    </div>
+  );
+};
+export default DateFilter;

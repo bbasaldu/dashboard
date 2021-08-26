@@ -55,6 +55,7 @@ const lineData = [
     showing: true,
   },
 ];
+const yAxisLine = generateData((count) => count)
 const transitionTime = 1000;
 const transitionEase = d3.easeQuadOut;
 const yTicks = 5;
@@ -144,6 +145,7 @@ const MultiLineChartV3 = (props) => {
         xTickDim,
         yMin,
         yMax,
+        yAxisLine,
         yTickDim,
         yTicks,
         margin,

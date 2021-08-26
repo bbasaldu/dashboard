@@ -136,18 +136,19 @@ export const buildMultiLineChart = (vars, data) => {
   svg.append("g").attr("id", `${id}_pathGroup`);
   svg.append("line").attr("id", `${id}_YAxisHighlight`);
 
-
-  svg.append("clipPath")
-        .attr("id", "chartClipPath")
+  svg
+    .append("clipPath")
+    .attr("id", "chartClipPath")
     .append("rect")
-        .attr("x", margin.left)
-        .attr("y", 0)
-        .attr("width", xScale(new Date("2021-01-01T00:00:00")) - margin.left)
-        .attr("height", height)
+    .attr("x", margin.left)
+    .attr("y", 0)
+    .attr("width", xScale(new Date("2021-01-01T00:00:00")) - margin.left)
+    .attr("height", height);
 };
 
 const registerEvents = (vars, data) => {
-  const { id, line, height, theme, xScale, yScale, yMin, yMax } = vars;
+  const { id, line, height, theme, xScale, yScale, yAxisLine, yMin, yMax } =
+    vars;
   const svg = d3.select(`#${id}_svg`);
   const svgDim = getCoords(svg.node());
   const radius = 4;
@@ -237,7 +238,7 @@ const registerEvents = (vars, data) => {
   //for setting selective pointer marker//
   const points = [];
   //same for all elems in data array
-  data[0].pointData.forEach((e) => {
+  yAxisLine.forEach((e) => {
     let x, y;
     x = xScale(e.x);
     y = yScale(yMin); //yScale(e.y);
@@ -265,11 +266,15 @@ const registerEvents = (vars, data) => {
 
     const index = delanauy.find(mouse[0], yScale(yMin));
     //only on index change - bug where on first run index is wrong
-    highlightYAxis(index);
-    setPointMarkers(index);
-    d3.select(`#${id}_tooltipTop`).style("display", "unset");
-    d3.selectAll(`.${classes.tooltip}`).style("display", "initial");
-    setToolTips(index);
+    if(data.length !== 0){
+        setPointMarkers(index);
+        d3.select(`#${id}_tooltipTop`).style("display", "unset");
+        d3.selectAll(`.${classes.tooltip}`).style("display", "initial");
+        setToolTips(index);
+        highlightYAxis(index);
+    }
+    
+    
   });
 
   svg.on("mouseleave", () => {
@@ -286,14 +291,16 @@ const registerEvents = (vars, data) => {
       ev.preventDefault();
       const mouse = d3.pointers(ev)[0]; //for some reason d3.pointer doesn't work for touchmove
       const index = delanauy.find(mouse[0], yScale(yMin));
-      setPointMarkers(index);
-      setToolTips(index);
-      highlightYAxis(index);
-      //big bug where inital position of these elements is completely off on very first render
-      //on second render it is fine
-      setPointMarkers(index);
-      setToolTips(index);
-      highlightYAxis(index);
+      if(data.length !== 0){
+        setPointMarkers(index);
+        setToolTips(index);
+        highlightYAxis(index);
+        //big bug where inital position of these elements is completely off on very first render
+        //on second render it is fine
+        setPointMarkers(index);
+        setToolTips(index);
+        highlightYAxis(index);
+      }
 
       //navigator.vibrate(200) not on ios...
     })
@@ -302,11 +309,13 @@ const registerEvents = (vars, data) => {
       const mouse = d3.pointers(ev)[0]; //for some reason d3.pointer doesn't work for touchmove
       const index = delanauy.find(mouse[0], yScale(yMin));
       //only on index change - bug where on first run index is wrong
-      setPointMarkers(index);
-      d3.select(`#${id}_tooltipTop`).style("display", "initial");
-      d3.selectAll(`.${classes.tooltip}`).style("display", "initial");
-      setToolTips(index);
-      highlightYAxis(index);
+      if(data.length !== 0){
+        setPointMarkers(index);
+        d3.select(`#${id}_tooltipTop`).style("display", "initial");
+        d3.selectAll(`.${classes.tooltip}`).style("display", "initial");
+        setToolTips(index);
+        highlightYAxis(index);
+      }
     })
     .on("touchend", () => {
       const pointMarkerGroup = svg.select(`#${id}_pointMarkerGroup`);
@@ -337,7 +346,7 @@ export const changeData = (vars, data) => {
   const handleEnter = (enter) => {
     const path = enter
       .append("path")
-      .attr('clip-path', 'url(#chartClipPath)')
+      .attr("clip-path", "url(#chartClipPath)")
       .attr("fill", "none")
       .attr("stroke", (d, i) => getPathColor(d.label))
       .attr("stroke-width", "2")
@@ -483,6 +492,7 @@ export const rangeChange = (vars, data) => {
     .call(d3.axisLeft(yScale).tickSize(tickSize).ticks(yTicks));
 
   registerEvents(vars, data);
+
   const handleUpdate = (update) => {
     update.each(function (d) {
       if (!d.showing) {
