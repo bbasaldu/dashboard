@@ -11,18 +11,25 @@
   
   cursor: pointer;
   transition: background-color ease 250ms;
-  /* flex-grow: 1; */
+}
+.icon{
+  color: #696969;
 }
 .container:hover {
   background-color: #2cd9d025;
 }
 .container:hover .icon {
-    fill:#2cd9d0;
+  fill:#2cd9d0;
+}
+.container:hover .right{
+  color:#000;
 }
 .active {
-    background-color: #2cd9d025;
+  background-color: #2cd9d025;
 }
-
+.active .right {
+  color: #000;
+}
 .active .icon{
     fill:#2cd9d0;
 }
@@ -44,4 +51,5 @@
   margin-left: 10px;
   flex-grow: 1;
   justify-content: flex-start;
+  color:#C0C0C0;
 }
