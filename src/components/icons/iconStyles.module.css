@@ -1,0 +1,6 @@
+.helpIcon {
+    padding: 5px;
+    background-color: hsl(176, 71%, 92%);
+    border-radius: 50%;
+    display: flex;
+}

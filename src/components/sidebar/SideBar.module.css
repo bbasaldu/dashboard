@@ -1,14 +1,25 @@
 
 .container{
-    position: relative;
-    min-width: 70px;
-    background-color: #cb8;
-    
-}
-.sidebar{
     position: fixed;
-    background-color: #cb8;
-    width: 50px;
+    width: 15vw;
+    background-color: white;
     height: 100vh;
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: flex-start;
+    overflow-x: scroll;
+}
+
+.top {
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+}
+.bottom {
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: flex-end;
 }

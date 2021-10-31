@@ -1,6 +1,34 @@
 .selectbar{
     background-color: inherit;
-    text-align: center;
-    border-bottom-style: solid;
-    border-bottom-width: 0.5px;
+    display: flex;
+    flex-grow: 1;
+    padding: 0 10px;
+}
+
+.projectSelect{
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-start;
+    align-items: center;
+}
+.userSelect{
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+    align-items: center;
+}
+.addContainer{
+    cursor: pointer;
+    margin-left: 1vw;
+    padding: 5px;
+    background-color: hsl(176, 71%, 92%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.plusIcon {
+    width: 25px;
+    height: 25px;
+    fill:#2cd9d0;
 }

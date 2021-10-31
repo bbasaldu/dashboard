@@ -18,6 +18,8 @@ import screenIcon from "../../../assets/fi-rr-screen.svg";
 import MultiLineChart from "./VisualizationTemplates/MultiLineChart";
 import MultiLineChartV2 from "./VisualizationTemplates/MultiLineChartV2";
 import MultiLineChartV3 from "./VisualizationTemplates/MultiLineChartV3";
+import DashboardTop from "./DashboardTop";
+import { Fragment } from "react";
 //import MultiLineChart from "./VisualizationTemplates/newCharts/MultiLineChart/MultiLineChart";
 const DashBoard = () => {
   //fake data for line chart
@@ -92,7 +94,10 @@ const DashBoard = () => {
 ]
 
   return (
+    <Fragment>
+      <DashboardTop />
     <div className={classes.container}>
+      
       <LevelOneContainer>
         <TitleCard
           title="Year Total"
@@ -241,6 +246,7 @@ const DashBoard = () => {
         </Table>
       </LevelOneContainer>
     </div>
+    </Fragment>
   );
 };
 export default DashBoard;

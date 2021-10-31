@@ -1,0 +1,47 @@
+.container {
+  background-color: #fff;
+  border: 0px;
+  border-radius: 5px;
+  margin: 5px;
+  margin-bottom: 0px;
+  padding: 5px;
+  padding-left: 15px;
+  display: flex;
+  align-items: center;
+  
+  cursor: pointer;
+  transition: background-color ease 250ms;
+  /* flex-grow: 1; */
+}
+.container:hover {
+  background-color: #2cd9d025;
+}
+.container:hover .icon {
+    fill:#2cd9d0;
+}
+.active {
+    background-color: #2cd9d025;
+}
+
+.active .icon{
+    fill:#2cd9d0;
+}
+.dot {
+    display: flex;
+    margin-right: 10px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color:#2cd9d0;
+}
+.left {
+  display: flex;
+  /* flex-grow: 1; */
+  /* justify-content: flex-start; */
+}
+.right {
+  display: flex;
+  margin-left: 10px;
+  flex-grow: 1;
+  justify-content: flex-start;
+}

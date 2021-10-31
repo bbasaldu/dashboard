@@ -1,0 +1,9 @@
+.wrapper { 
+    border: 0px;
+    border-radius: 10px;
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}

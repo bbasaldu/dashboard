@@ -1,0 +1,20 @@
+.item {
+    display: flex;
+    margin-right: 5vw;
+}
+.left {
+    background-color: #f9fafb;
+    border-radius: 25%;
+    padding: 10px;
+}
+.left img{
+    width: 30px;
+    height: 30px;
+}
+.right {
+    margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: medium;
+}
