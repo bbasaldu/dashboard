@@ -1,9 +1,6 @@
-.App {
-
-  background-color: #f9fafb;
+.app {
   width: 100%;
-  min-height: 100vh;
-  
+  padding: 20px 20px;
 }
 
 .layout{

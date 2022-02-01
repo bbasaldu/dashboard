@@ -1,0 +1,11 @@
+.Layout {
+
+}
+.mobileLayout {
+
+}
+.mainContent {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}

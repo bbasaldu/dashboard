@@ -1,0 +1,16 @@
+.cardWrapper {
+  border-radius: 20px;
+  border: 1px solid #e0e0e4;
+  background-color: #fff;
+  width: 100%;
+  /* 16:9 apsect ratio */
+  padding-bottom: 56.25%;
+  margin: 10px 0px;
+}
+.cardWrapperMobile {
+  /* 4:3 apsect ratio */
+  padding-bottom: 75%;
+}
+.content {
+  position: absolute;
+}
