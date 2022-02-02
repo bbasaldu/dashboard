@@ -1,11 +1,10 @@
-.chartContainer{
+.chartContainer {
     position: relative;
     width: 100%;
-    padding-bottom: 56.25%;
-    /* background-color: blue; */
-    margin-bottom: 10px;
-    /* aspect-ratio: 16 / 9; */
+    /* 100% - height of title (assumes every chart will have a title) */
+    height: calc(100% - 50px);
 }
-.chartContainer svg{
-    position: absolute;
-}
+/* .chartContainer svg {
+    position: relative;
+    height: inherit;
+} */

@@ -1,7 +1,8 @@
+import Card from "../Card";
 import Chart from "../Chart";
 import TitleCard from "../TitleCard";
 import { renderChart } from "./linechart";
-const data = []
+const data = [];
 let count = 1;
 for (let i = 1; i <= 12; i++) {
   for (let j = 1; j <= 30; j++) {
@@ -16,12 +17,13 @@ for (let i = 1; i <= 12; i++) {
     count += 0.1;
   }
 }
-console.log(data)
+console.log(data);
 const LineChart = () => {
   return (
-      <TitleCard>
-        <Chart renderFunction={renderChart} data={data}/>
-      </TitleCard>
-  )
+    <Card>
+      <TitleCard title="Year Total" value={data[data.length-1].y}/>
+      <Chart renderFunction={renderChart} data={data} />
+    </Card>
+  );
 };
 export default LineChart;

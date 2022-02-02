@@ -1,4 +1,6 @@
 .cardWrapper {
+  position: relative;
+  /* position relative removes need for taking margin/padding into account */
   border-radius: 20px;
   border: 1px solid #e0e0e4;
   background-color: #fff;
@@ -13,4 +15,10 @@
 }
 .content {
   position: absolute;
+  border: 1px solid red;
+  width: 100%;
+  /* 40px of padding from Layout + 20px of margin from cardWrapper class above */
+  height: 100%;
+  padding: 5px;
+  
 }
