@@ -1,6 +1,26 @@
 .cardClass {
-    background-color: transparent;
+  background-color: transparent;
 }
-.quadCard{
-    
+/* content div inside of Card */
+.cardClass div:nth-child(1) {
+  padding: 0px;
+}
+.row {
+  display: flex;
+  height: calc(50% - 2.5px);
+}
+/* top row */
+.row:nth-child(1) {
+  margin-bottom: 5px;
+}
+.quadCard {
+  width: calc(50% - 2.5px);
+  height: 100%;
+  background-color: #fff;
+  border-radius: 20px;
+  border: 1px solid #e0e0e4;
+}
+/* left card */
+.quadCard:nth-child(1) {
+  margin-right: 5px;
 }
