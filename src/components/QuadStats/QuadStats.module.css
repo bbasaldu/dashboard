@@ -2,7 +2,8 @@
   background-color: transparent;
 }
 /* content div inside of Card */
-.cardClass div:nth-child(1) {
+/* first div */
+.cardClass > div:nth-child(1) {
   padding: 0px;
 }
 .row {
@@ -19,8 +20,30 @@
   background-color: #fff;
   border-radius: 20px;
   border: 1px solid #e0e0e4;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 5px;
 }
 /* left card */
 .quadCard:nth-child(1) {
   margin-right: 5px;
+}
+.quadCardTop{
+    flex-grow: 1;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    display: flex;
+    align-items: center;
+}
+.quadCardMid{
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+.quadCardBottom{
+    flex-grow: 1;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    display: flex;
+    align-items: center;
 }

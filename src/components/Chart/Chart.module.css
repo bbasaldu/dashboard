@@ -3,8 +3,5 @@
     width: 100%;
     /* 100% - height of title (assumes every chart will have a title) */
     height: calc(100% - 50px);
+    
 }
-/* .chartContainer svg {
-    position: relative;
-    height: inherit;
-} */

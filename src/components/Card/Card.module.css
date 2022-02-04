@@ -6,10 +6,15 @@
   background-color: #fff;
   width: 100%;
   /* 16:9 apsect ratio */
+  /* aspect-ratio property not working as i thought */
+  /* i decided to use the ol padding trick for aspect ratio */
   padding-bottom: 56.25%;
+  /* aspect-ratio: 16 / 9; */
   margin: 10px 0px;
 }
+
 .cardWrapperMobile {
+  /* aspect-ratio: 4 / 3; */
   /* 4:3 apsect ratio */
   padding-bottom: 75%;
 }

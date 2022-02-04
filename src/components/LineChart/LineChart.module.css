@@ -1,18 +1,55 @@
 .xAxis line {
-    opacity: 0;
+  opacity: 0;
 }
 .xAxis path {
-    opacity: 0;
+  opacity: 0;
+}
+.xAxis text {
+  color: #c0c0c0;
 }
 .yAxis line {
-    opacity: 0;
+  opacity: 0;
 }
 .yAxis path {
-    opacity: 0;
+  opacity: 0;
 }
-.grid line{
-    stroke-width: 0.5px;
+.yAxis text {
+  color: #c0c0c0;
 }
-.grid path{
-    stroke: none;
+.grid line {
+  stroke-width: 0.5px;
+}
+.grid path {
+  stroke: none;
+}
+.tooltip {
+  position: absolute;
+  
+  background-color: #051c1b;
+  padding: 1em;
+  border-radius: 10px;
+  pointer-events: none;
+
+  text-align: center;
+  /* opacity: 0; */
+}
+.tooltip::before {
+  content: " ";
+  position: absolute;
+  display: block;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  pointer-events: none;
+  border-top: 7px solid #051c1b;
+  left: calc(50% - 7px);
+  top: calc(100%);
+}
+.tooltipTop{
+    color: white;
+    margin-bottom: 5px;
+    font-size: clamp(10px, 2vw, 16px)
+}
+.tooltipBottom{
+  color: #C0C0C0;
+  font-size: clamp(8px, 1vw, 14px)
 }
