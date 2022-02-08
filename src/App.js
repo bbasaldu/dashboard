@@ -1,5 +1,6 @@
 import LineChart from './components/LineChart';
 import QuadStats from './components/QuadStats';
+import Table from './components/Table';
 import Layout from './layouts/Layout'
 function App() {
   
@@ -7,7 +8,7 @@ function App() {
     <Layout>
       <LineChart/>
       <QuadStats/>
-      <LineChart/>
+      <Table/>
     </Layout>
   );
 }

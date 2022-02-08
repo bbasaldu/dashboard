@@ -20,7 +20,7 @@
 }
 .content {
   position: absolute;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 100%;
   /* 40px of padding from Layout + 20px of margin from cardWrapper class above */
   height: 100%;
