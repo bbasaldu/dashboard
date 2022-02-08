@@ -8,7 +8,7 @@ function App() {
     <Layout>
       <LineChart/>
       <QuadStats/>
-      <Table/>
+      <Table title="Example Table"/>
     </Layout>
   );
 }

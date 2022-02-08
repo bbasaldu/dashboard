@@ -1,26 +1,27 @@
+import ArrowValue from "../ArrowValue";
 import Card from "../Card";
+import TitleCard from "../TitleCard";
 import cls from "./Table.module.css";
-const testHeaders = ["header1", "header2", "header3"];
-const testDiv = <div>Hello</div>;
+const testHeaders = ["Label", "Value", "% Total", "% Change"];
+
 const testRows = [
-  [1, 2, testDiv],
-  [3, 4, testDiv],
-  [5, 6, testDiv],
+  [1, 2, '40%',<ArrowValue positive={true} value={23}/>],
+  [3, 4, '40%',<ArrowValue positive={false} value={43}/>],
+  [5, 6, '40%',<ArrowValue positive={true} value={23}/>],
 ];
 const Table = (props) => {
-  //   const { data } = props;
-  //   const { headers , rows} = data
-
+  const {title=null, headers=testHeaders, rows=testRows} = props
   return (
     <Card>
-      <table className={cls.table}>
+     {title &&  <TitleCard title={title}/>}
+      <table className={[cls.table, title?cls.title:''].join(' ')}>
         <tbody>
           <tr className={cls.headersWrapper}>
-            {testHeaders.map((header) => {
+            {headers.map((header) => {
               return <th key={`header_${header}`}>{header}</th>;
             })}
           </tr>
-          {testRows.map((row, i) => {
+          {rows.map((row, i) => {
             return (
               <tr key={`row_${i}`}>
                 {row.map((value, j) => {
