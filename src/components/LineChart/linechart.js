@@ -87,7 +87,7 @@ export const renderChart = (vars) => {
   const path = svg
     .append("path")
     .attr("fill", "none")
-    .attr("stroke", "red")
+    .attr("stroke", theme.third)
     .attr("d", line(data));
   const transitionTime = 1000;
   const transitionEase = d3.easeQuadOut;
