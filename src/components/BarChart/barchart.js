@@ -7,6 +7,8 @@ const theme = {
   third: "#2cd9d0",
   fourth: "#F5F5F5",
 };
+let xScale;
+let xAxis;
 export const renderChart = (vars) => {
   const { data, containerRef, transition } = vars;
   const container = d3.select(containerRef);
@@ -19,7 +21,7 @@ export const renderChart = (vars) => {
     .attr("width", width)
     .attr("height", height);
 
-  const xScale = d3
+  xScale = d3
     .scaleBand()
     .domain(data.map((d) => d.label))
     .padding(0.05);
@@ -40,7 +42,7 @@ export const renderChart = (vars) => {
   xScale.range([margin.left, width - margin.right]);
   yScale.range([height - margin.bottom, margin.top]).nice();
 
-  svg
+  xAxis = svg
     .append("g")
     .attr("class", classes.xAxis)
     .attr("transform", `translate(0, ${height - margin.bottom})`)
@@ -67,6 +69,7 @@ export const renderChart = (vars) => {
 
   const bars = svg
     .append("g")
+    .attr("id", "bars")
     .selectAll(".Bars")
     .data(data, (d) => d.label)
     .enter()
@@ -92,6 +95,24 @@ export const renderChart = (vars) => {
 };
 
 export const updateData = (vars) => {
-    const {data,} = vars
-    console.log(data)
+  const { data, containerRef } = vars;
+  const container = d3.select(containerRef);
+  const svg = container.select("svg");
+  const rectGroup = svg.select("#bars");
+  xScale.domain(data.map((d) => d.label));
+  xAxis.transition().duration(1000).call(d3.axisBottom(xScale));
+  const handleUpdate = (update) => {
+    update
+      .transition()
+      .duration(1000)
+      .attr("x", (d) => xScale(d.label));
+  };
+  rectGroup
+    .selectAll("rect")
+    .data(data, (d) => d.label)
+    .join(
+      (enter) => {},
+      (update) => handleUpdate(update),
+      (exit) => {}
+    );
 };

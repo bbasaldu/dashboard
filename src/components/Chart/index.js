@@ -8,15 +8,15 @@ const Chart = (props) => {
     updateFunction = () => {},
   } = props;
   const containerRef = useRef();
-  const [firstRender, setFirstRender] = useState(false);
+  const firstRenderRef = useRef(false);
   useEffect(() => {
-    if (!firstRender) {
+    if (!firstRenderRef.current) {
       renderFunction({
         data,
         containerRef: containerRef.current,
         transition: true,
       });
-      setFirstRender(true);
+      firstRenderRef.current = true;
     } else {
       updateFunction({
         data,
@@ -24,7 +24,7 @@ const Chart = (props) => {
         transition: true,
       });
     }
-  }, [renderFunction, data, firstRender, updateFunction]);
+  }, [renderFunction, data, updateFunction]);
   useEffect(() => {
     window.addEventListener("resize", () =>
       renderFunction({
