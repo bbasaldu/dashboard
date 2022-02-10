@@ -13,6 +13,9 @@
     color: #FFF;
     border-radius: 5px;
     padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .selectionList {
     position: absolute;
@@ -33,4 +36,7 @@
 }
 .selectionList li:hover{
     background-color: #EEE;
+}
+.whiteArrow {
+    border-top: 1.2vmin solid #fff;
 }

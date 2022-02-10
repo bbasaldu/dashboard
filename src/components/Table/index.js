@@ -5,9 +5,9 @@ import cls from "./Table.module.css";
 const testHeaders = ["Label", "Value", "% Total", "% Change"];
 
 const testRows = [
-  [1, 2, '40%',<ArrowValue positive={true} value={23}/>],
-  [3, 4, '40%',<ArrowValue positive={false} value={43}/>],
-  [5, 6, '40%',<ArrowValue positive={true} value={23}/>],
+  [1, 2, '40%',<ArrowValue value={23}/>],
+  [3, 4, '40%',<ArrowValue value={-43}/>],
+  [5, 6, '40%',<ArrowValue value={23}/>],
 ];
 const Table = (props) => {
   const {title=null, headers=testHeaders, rows=testRows} = props

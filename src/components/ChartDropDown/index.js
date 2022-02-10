@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Arrow from '../Arrow'
 import cls from "./ChartDropDown.module.css";
 const ChartDropDown = (props) => {
   const { options, selected, onChange } = props;
@@ -14,6 +15,7 @@ const ChartDropDown = (props) => {
         onClick={() => setShowOptions((last) => !last)}
       >
         {selected}
+        <Arrow className={cls.whiteArrow} variant="down"/>
       </button>
       {showOptions && (
         <ul className={cls.selectionList}>
