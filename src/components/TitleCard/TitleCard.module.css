@@ -6,6 +6,9 @@
     align-items: center;
     justify-content: space-between;
 }
+.title {
+    font-weight: bold;
+}
 .titleCardText {
-    font-size: 1.2em;
+    font-size: 1em;
 }

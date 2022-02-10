@@ -24,7 +24,8 @@ export const renderChart = (vars) => {
   xScale = d3
     .scaleBand()
     .domain(data.map((d) => d.label))
-    .padding(0.05);
+    .paddingInner(0.05)
+    //.padding(0.05);
 
   const yMin = 0;
   const yMax = d3.max(data, (d) => d.value);
