@@ -25,5 +25,28 @@
   opacity: 0;
 }
 .barChart {
-    height: calc(100% - 75px);
+  height: calc(100% - 75px);
+}
+.tooltip {
+  position: absolute;
+
+  background-color: #051c1b;
+  padding: 1em;
+  border-radius: 10px;
+  pointer-events: none;
+
+  text-align: center;
+  color: white;
+  /* opacity: 0; */
+}
+.tooltip::before {
+  content: " ";
+  position: absolute;
+  display: block;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  pointer-events: none;
+  border-top: 7px solid #051c1b;
+  left: calc(50% - 7px);
+  top: calc(100%);
 }

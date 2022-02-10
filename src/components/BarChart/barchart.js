@@ -92,6 +92,7 @@ export const renderChart = (vars) => {
       .attr("y", (d) => yScale(d.value))
       .attr("height", (d) => height - yScale(d.value) - margin.bottom);
   }
+  registerEvents(vars)
 };
 
 export const updateData = (vars) => {
@@ -116,3 +117,38 @@ export const updateData = (vars) => {
       (exit) => {}
     );
 };
+const id = 'bars'
+function setToolTip(container, pos, value){
+  let tooltip = d3.select(`#${id}_tooltip`);
+    if (tooltip.empty()) {
+      tooltip = container
+        .append("div")
+        .attr("id", `${id}_tooltip`)
+        .attr("class", classes.tooltip);
+    }
+    const x = pos[0]
+    const y = pos[1]
+    const tooltipDim = tooltip.node().getBoundingClientRect();
+    tooltip
+      .style("opacity", 1)
+      .style("left", `${x - tooltipDim.width / 2}px`)
+      .style("top", `${y - tooltipDim.height - 7 - 14}px`)
+      .html(value)
+}
+function registerEvents(vars){
+  const { containerRef } = vars;
+  const container = d3.select(containerRef);
+  const svg = container.select("svg");
+  const rectGroup = svg.select("#bars");
+  const bars = rectGroup.selectAll('rect')
+  
+  bars.on('mousemove', (ev, d) => {
+    const mouse = d3.pointer(ev);
+    setToolTip(container, mouse, d.value)
+  })
+  .on('mouseleave', () => {
+    d3.select(`#${id}_tooltip`).remove()
+  })
+  
+
+}
