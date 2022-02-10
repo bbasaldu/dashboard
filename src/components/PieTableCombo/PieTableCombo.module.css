@@ -1,0 +1,17 @@
+.content {
+  height: calc(100% - 50px);
+  width: 100%;
+  display: flex;
+}
+.split {
+  width: 50%;
+  height: 100%;
+}
+.pieLegendSquare {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+}
+.noTitle {
+  height: 100%;
+}

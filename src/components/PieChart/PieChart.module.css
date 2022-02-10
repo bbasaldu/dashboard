@@ -1,0 +1,11 @@
+.pieTextTop {
+    text-anchor: middle;
+    font-weight: bold;
+    font-size: 40px;
+}
+.pieTextBottom {
+    text-anchor: middle;
+    fill: #c0c0c0;
+    font-weight: bold;
+    font-size: 20px;
+}

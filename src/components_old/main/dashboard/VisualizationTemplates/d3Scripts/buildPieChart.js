@@ -25,7 +25,7 @@ export const buildPieChart = (id, data, options = null, transition = true) => {
     .innerRadius(mainArc.inner)
     .outerRadius(mainArc.outer)
     .cornerRadius(15);
-
+  console.log(arcs)
   //orignally only b param and start and end angle fixed to 0
   function tweenPie(end, b) {
     let i = d3.interpolate({ startAngle: end, endAngle: end }, b);

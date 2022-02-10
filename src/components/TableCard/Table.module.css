@@ -26,6 +26,7 @@
   border-bottom-right-radius: 20px;
 }
 .table th {
+  font-size: 0.9em;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;

@@ -1,6 +1,4 @@
 import ArrowValue from "../ArrowValue";
-import Card from "../Card";
-import TitleCard from "../TitleCard";
 import cls from "./Table.module.css";
 const testHeaders = ["Label", "Value", "% Total", "% Change"];
 
@@ -10,11 +8,9 @@ const testRows = [
   [5, 6, '40%',<ArrowValue value={23}/>],
 ];
 const Table = (props) => {
-  const {title=null, headers=testHeaders, rows=testRows} = props
-  return (
-    <Card>
-     {title &&  <TitleCard title={title}/>}
-      <table className={[cls.table, title?cls.title:''].join(' ')}>
+    const {headers=testHeaders, rows=testRows, className} = props
+    return (
+        <table className={[cls.table, className].join(' ')}>
         <tbody>
           <tr className={cls.headersWrapper}>
             {headers.map((header) => {
@@ -32,7 +28,6 @@ const Table = (props) => {
           })}
         </tbody>
       </table>
-    </Card>
-  );
-};
-export default Table;
+    )
+}
+export default Table
