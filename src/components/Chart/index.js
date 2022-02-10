@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import useIsVisible from "../../hooks/useIsVisible";
 import cls from "./Chart.module.css";
 const Chart = (props) => {
   const {
@@ -9,31 +10,36 @@ const Chart = (props) => {
   } = props;
   const containerRef = useRef();
   const firstRenderRef = useRef(false);
+  const isVisible = useIsVisible(containerRef);
   useEffect(() => {
-    if (!firstRenderRef.current) {
-      renderFunction({
-        data,
-        containerRef: containerRef.current,
-        transition: true,
-      });
-      firstRenderRef.current = true;
-    } else {
-      updateFunction({
-        data,
-        containerRef: containerRef.current,
-        transition: true,
-      });
+    if (isVisible) {
+      if (!firstRenderRef.current) {
+        renderFunction({
+          data,
+          containerRef: containerRef.current,
+          transition: true,
+        });
+        firstRenderRef.current = true;
+      } else {
+        updateFunction({
+          data,
+          containerRef: containerRef.current,
+          transition: true,
+        });
+      }
     }
-  }, [renderFunction, data, updateFunction]);
+  }, [renderFunction, data, updateFunction, isVisible]);
   useEffect(() => {
-    window.addEventListener("resize", () =>
-      renderFunction({
-        data,
-        containerRef: containerRef.current,
-        transition: false,
-      })
-    );
-  }, [renderFunction, data]);
+    if (isVisible) {
+      window.addEventListener("resize", () =>
+        renderFunction({
+          data,
+          containerRef: containerRef.current,
+          transition: false,
+        })
+      );
+    }
+  }, [renderFunction, data, isVisible]);
   return (
     <div
       className={[cls.chartContainer, className ? className : ""].join(" ")}
