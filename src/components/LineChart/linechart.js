@@ -88,6 +88,8 @@ export const renderChart = (vars) => {
     .append("path")
     .attr("fill", "none")
     .attr("stroke", theme.third)
+    .attr('stroke-width', 2)
+    .attr('stroke-linecap', 'round')
     .attr("d", line(data));
   const transitionTime = 1000;
   const transitionEase = d3.easeQuadOut;

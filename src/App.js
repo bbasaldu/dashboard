@@ -1,5 +1,6 @@
 import BarChart from './components/BarChart';
 import LineChart from './components/LineChart';
+import MultiLineChartCard from './components/MultiLineChart/MultiLineChartCard';
 import PieTableCombo from './components/PieTableCombo';
 import QuadStats from './components/QuadStats';
 import TableCard from './components/TableCard';
@@ -21,6 +22,7 @@ function App() {
       <PieTableCombo/>
       <TableCard/>
       <BarChart/>
+      <MultiLineChartCard/>
     </Layout>
   );
 }
