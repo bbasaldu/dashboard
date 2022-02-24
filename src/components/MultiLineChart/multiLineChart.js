@@ -82,11 +82,23 @@ const calculateAxis = (isNew) => {
     pathGroup = svg.append("g").attr("id", "multiLineGroup");
   } else {
     d3.select(`#${id}_xAxis`)
+      .transition()
+      .duration(transitionTime)
+      .ease(transitionEase)
       .attr("transform", `translate(0, ${height - margin.bottom})`)
       .call(d3.axisBottom(xScale).tickFormat(d3.timeFormat("%b")));
     d3.select(`#${id}_yAxis`)
+      .transition()
+      .duration(transitionTime)
+      .ease(transitionEase)
       .attr("transform", `translate(${margin.left}, 0)`)
       .call(d3.axisLeft(yScale).ticks(5));
+    d3.select(`#${id}_grid`)
+      .transition()
+      .duration(transitionTime)
+      .ease(transitionEase)
+      .attr("transform", `translate(0, ${height - margin.bottom})`)
+      .call(d3.axisBottom(xScale).tickSize(-height).tickFormat(""));
   }
 };
 
