@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Arrow from "../Arrow";
 import cls from "./DropDown.module.css";
 const DropDown = (props) => {
@@ -18,6 +18,9 @@ const DropDown = (props) => {
     }
     onChange(checkedOptions.current)
   };
+  const handleClick = (opt) => {
+    document.getElementById(opt).click()
+  }
   return (
     <div className={cls.dropDownWrapper}>
       <button
@@ -36,7 +39,7 @@ const DropDown = (props) => {
       >
         {options.map((opt) => {
           return (
-            <li key={opt}>
+            <li onClick={() => handleClick(opt)} className={cls.labelContainer} key={opt}>
               <input
                 defaultChecked
                 onChange={handleChange}

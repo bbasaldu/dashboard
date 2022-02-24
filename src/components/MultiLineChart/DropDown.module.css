@@ -46,3 +46,9 @@
 .hidden {
     display: none;
 }
+.labelContainer * {
+    cursor: pointer;
+}
+.labelContainer input,label{
+    pointer-events: none;
+}
