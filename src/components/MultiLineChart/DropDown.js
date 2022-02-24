@@ -1,13 +1,22 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Arrow from "../Arrow";
 import cls from "./DropDown.module.css";
 const DropDown = (props) => {
-  const { options, selected, onChange } = props;
+  const { options, onChange } = props;
   const [showOptions, setShowOptions] = useState(false);
+  //const [checkedOptions, setCheckedOptions] = useState(options);
+  const checkedOptions = useRef(options)
   const handleChange = (ev) => {
     const isChecked = ev.target.checked;
-    const opt = ev.target.value;
-    onChange(opt);
+    const currOpt = ev.target.value;
+    const lastCheckedOptions = checkedOptions.current.slice()
+    if(!isChecked){
+      checkedOptions.current = lastCheckedOptions.filter(opt => opt !== currOpt)
+    }
+    else {
+      checkedOptions.current = [...lastCheckedOptions, currOpt]
+    }
+    onChange(checkedOptions.current)
   };
   return (
     <div className={cls.dropDownWrapper}>
