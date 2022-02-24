@@ -230,24 +230,56 @@ const registerEvents = (vars) => {
         .html(value);
     });
   };
-  svg.on("mousemove", (ev) => {
-    const mouse = d3.pointer(ev);
-    const index = delanauy.find(mouse[0], yScale(yMin));
-    d3.select(`#${id}_tooltipTop`).style("display", "unset");
-    d3.selectAll(`.${classes.tooltip}`).style("display", "initial");
-    highlightYAxis(index);
-    setPointMarkers(index);
-    setToolTips(index);
-  });
-  svg.on("mouseleave", () => {
-    const pointMarkerGroup = svg.select(`#${id}_pointMarkerGroup`);
-    if (!pointMarkerGroup.empty()) {
-      pointMarkerGroup.remove();
-    }
-    d3.select(`#${id}_YAxisHighlight`).remove();
-    d3.select(`#${id}_tooltipTop`).style("display", "none");
-    d3.selectAll(`.${classes.tooltip}`).style("display", "none");
-  });
+  svg
+    .on("mousemove", (ev) => {
+      const mouse = d3.pointer(ev);
+      const index = delanauy.find(mouse[0], yScale(yMin));
+      d3.select(`#${id}_tooltipTop`).style("display", "unset");
+      d3.selectAll(`.${classes.tooltip}`).style("display", "initial");
+      highlightYAxis(index);
+      setPointMarkers(index);
+      setToolTips(index);
+    })
+    .on("mouseleave", () => {
+      const pointMarkerGroup = svg.select(`#${id}_pointMarkerGroup`);
+      if (!pointMarkerGroup.empty()) {
+        pointMarkerGroup.remove();
+      }
+      d3.select(`#${id}_YAxisHighlight`).remove();
+      d3.select(`#${id}_tooltipTop`).style("display", "none");
+      d3.selectAll(`.${classes.tooltip}`).style("display", "none");
+    });
+
+  svg
+    .on("touchstart", (ev) => {
+      ev.preventDefault();
+      const mouse = d3.pointers(ev)[0]; //for some reason d3.pointer doesn't work for touchmove
+      const index = delanauy.find(mouse[0], yScale(yMin));
+      d3.select(`#${id}_tooltipTop`).style("display", "unset");
+      d3.selectAll(`.${classes.tooltip}`).style("display", "initial");
+      highlightYAxis(index);
+      setPointMarkers(index);
+      setToolTips(index);
+    })
+    .on("touchmove", (ev) => {
+      ev.preventDefault();
+      const mouse = d3.pointers(ev)[0]; //for some reason d3.pointer doesn't work for touchmove
+      const index = delanauy.find(mouse[0], yScale(yMin));
+      d3.select(`#${id}_tooltipTop`).style("display", "unset");
+      d3.selectAll(`.${classes.tooltip}`).style("display", "initial");
+      highlightYAxis(index);
+      setPointMarkers(index);
+      setToolTips(index);
+    })
+    .on("touchend", (ev) => {
+      const pointMarkerGroup = svg.select(`#${id}_pointMarkerGroup`);
+      if (!pointMarkerGroup.empty()) {
+        pointMarkerGroup.remove();
+      }
+      d3.select(`#${id}_YAxisHighlight`).remove();
+      d3.select(`#${id}_tooltipTop`).style("display", "none");
+      d3.selectAll(`.${classes.tooltip}`).style("display", "none");
+    });
 };
 export const renderChart = (vars) => {
   const { data, containerRef } = vars;
