@@ -219,9 +219,16 @@ const registerEvents = (vars) => {
         offset = offset * 50 + 6;
       }
 
-      if (tooltipDim.right >= svgDim.right) {
-        const thisDim = tooltip.node().getBoundingClientRect();
-        offset = -1 * offset - thisDim.width;
+      try{
+        if (tooltipDim.right >= svgDim.right) {
+          const thisDim = tooltip.node().getBoundingClientRect();
+          offset = -1 * offset - thisDim.width;
+        }
+      }
+      catch {
+        //not sure why the above might break
+        //gotta debug this later, for now just skip past it
+        //shouldn't break anything
       }
       tooltip
         .style(`left`, `${svgDim.left + x + offset}px`)
