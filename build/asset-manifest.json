@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/dashboard/static/css/main.0a20d02f.chunk.css",
-    "main.js": "/dashboard/static/js/main.ba728c1e.chunk.js",
-    "runtime-main.js": "/dashboard/static/js/runtime-main.d7f0c0fd.js",
-    "static/js/2.8c46f1cc.chunk.js": "/dashboard/static/js/2.8c46f1cc.chunk.js",
-    "static/js/3.22c1e99c.chunk.js": "/dashboard/static/js/3.22c1e99c.chunk.js",
+    "main.js": "/dashboard/static/js/main.ce65e75c.chunk.js",
+    "runtime-main.js": "/dashboard/static/js/runtime-main.11e4d1ff.js",
+    "static/js/2.039e318e.chunk.js": "/dashboard/static/js/2.039e318e.chunk.js",
+    "static/js/3.418f6761.chunk.js": "/dashboard/static/js/3.418f6761.chunk.js",
     "index.html": "/dashboard/index.html",
-    "static/js/2.8c46f1cc.chunk.js.LICENSE.txt": "/dashboard/static/js/2.8c46f1cc.chunk.js.LICENSE.txt",
+    "static/js/2.039e318e.chunk.js.LICENSE.txt": "/dashboard/static/js/2.039e318e.chunk.js.LICENSE.txt",
     "static/media/fi-rr-book.9f547e08.svg": "/dashboard/static/media/fi-rr-book.9f547e08.svg",
     "static/media/fi-rr-interrogation.ad61fa76.svg": "/dashboard/static/media/fi-rr-interrogation.ad61fa76.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.d7f0c0fd.js",
-    "static/js/2.8c46f1cc.chunk.js",
+    "static/js/runtime-main.11e4d1ff.js",
+    "static/js/2.039e318e.chunk.js",
     "static/css/main.0a20d02f.chunk.css",
-    "static/js/main.ba728c1e.chunk.js"
+    "static/js/main.ce65e75c.chunk.js"
   ]
 }
