@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { isScrolledIntoView } from "../components_old/general/usefulFunctions";
+import { isScrolledIntoView } from "../utility"
 
 const useIsVisible = (containerRef) => {
   const [isVisible, setIsVisible] = useState(false);
