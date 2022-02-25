@@ -1,25 +1,29 @@
-import { useDispatch } from 'react-redux';
-import classes from './App.module.css'
-import Main from './components/main/Main'
-import SideBar from './components/sidebar/SideBar'
-import { resizeActions } from './store/resizeSlice';
-import useMediaQuery from './hooks/useMediaQuery'
+import BarChart from './components/BarChart';
+import LineChart from './components/LineChart';
+import MultiLineChartCard from './components/MultiLineChart/MultiLineChartCard';
+import PieTableCombo from './components/PieTableCombo';
+import QuadStats from './components/QuadStats';
+import TableCard from './components/TableCard';
+import Layout from './layouts/Layout'
+// TODO:
+// Should've made chart components have a card version that includes Card component
+// with an optional title, like "LineChartCard", and have another version like "LineChart"
+// which is just the chart itself which fills some container 100%, this would've been more modular
+// basically what i did for the PieChart component...
+// but I'm too lazy to go back for now
+// It's not a huge issue since for this project since I'm not using the charts as super deep sub components
+// but it'd be better practice to do so
 function App() {
-  const dispatch = useDispatch()
-  window.onresize = () => {
-    dispatch(resizeActions.setResized(true))
-    dispatch(resizeActions.setResized(false))
-  }
   
-  const matches = useMediaQuery("(max-width: 600px)");
-
   return (
-    <div className={classes.App}>
-      <div className={classes.layout}>
-        {!matches && <SideBar/>}
-        <Main/>
-      </div>
-    </div>
+    <Layout>
+      <LineChart/>
+      <QuadStats/>
+      <PieTableCombo/>
+      <TableCard/>
+      <BarChart/>
+      <MultiLineChartCard/>
+    </Layout>
   );
 }
 

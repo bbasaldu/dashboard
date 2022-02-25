@@ -1,0 +1,43 @@
+.cardWrapper {
+  position: relative;
+  /* position relative removes need for taking margin/padding into account */
+  border-radius: 20px;
+  border: 1px solid #e0e0e4;
+  background-color: #fff;
+  width: 100%;
+  max-width: 700px;
+  /* 16:9 apsect ratio */
+  /* aspect-ratio property not working as i thought */
+  /* i decided to use the ol padding trick for aspect ratio */
+  /* padding-bottom: 56.25%; */
+  /* updated for some reason now it works, 
+  i forgot why it wasn't working before...
+  maybe ill find out soon...
+  */
+  aspect-ratio: 16 / 9;
+  margin: 10px 0px;
+}
+
+
+@supports (aspect-ratio: 4/3){
+  .cardWrapperMobile{
+    aspect-ratio: 4 / 3;
+  }
+}
+@supports not (aspect-ratio: 4/3){
+  /* aspect-ratio wasn't working on my iphone, so use padding trick instead*/
+  .cardWrapperMobile {
+    /* aspect-ratio: 4 / 3; */
+    /* 4:3 apsect ratio */
+    padding-bottom: 75%;
+  }
+}
+.content {
+  position: absolute;
+  /* border: 1px solid red; */
+  width: 100%;
+  /* 40px of padding from Layout + 20px of margin from cardWrapper class above */
+  height: 100%;
+  padding: 5px 10px;
+  
+}

@@ -1,0 +1,12 @@
+.wideScreenLayout {
+    padding: 20px 25%;
+}
+.mobileLayout {
+    padding: 20px;
+}
+.mainContent {
+    padding: 2.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

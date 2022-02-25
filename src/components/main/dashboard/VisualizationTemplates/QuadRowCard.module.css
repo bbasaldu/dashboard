@@ -1,9 +1,0 @@
-.container {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    flex-grow: 1;
-}
-.container:nth-of-type(1){
-    margin-bottom: 2.5%;
-}
